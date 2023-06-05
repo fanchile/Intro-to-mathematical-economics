@@ -1,0 +1,130 @@
+\contentsline {section}{\numberline {1}前言preface}{6}{section.1}%
+\contentsline {section}{\numberline {2}比较静态分析comparative statics}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}什么是比较静态分析}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}一般函数模型的比较静态分析}{8}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}引言}{8}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}隐函数定理与隐函数求导}{9}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}联立方程组中的隐函数定理与求导}{10}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}例子}{12}{subsubsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.3}总结}{14}{subsection.2.3}%
+\contentsline {section}{\numberline {3}无约束条件下的最优化unconstrained optimal}{15}{section.3}%
+\contentsline {subsection}{\numberline {3.1}为什么要最优化}{15}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}最优化问题是什么}{15}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}单个选择变量下的最优化}{15}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}一阶条件}{15}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}二阶条件}{16}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}两个选择变量下的最优化}{16}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}一阶条件}{16}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}二阶条件}{17}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}二次型有定符号的行列式检验}{18}{subsubsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4}二次型有定符号的特征根检验}{19}{subsubsection.3.4.4}%
+\contentsline {subsection}{\numberline {3.5}多个选择变量下的最优化}{19}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}一阶条件}{19}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}二阶条件}{19}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.6}二阶条件与目标函数的凹性与凸性}{20}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}如何判断凸性与凹性}{20}{subsubsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.7}总结}{21}{subsection.3.7}%
+\contentsline {section}{\numberline {4}约束条件下的最优化constrainted optimal}{22}{section.4}%
+\contentsline {subsection}{\numberline {4.1}拉格朗日乘数法}{22}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}乘数的经济学含义}{22}{subsubsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.2}二阶条件}{23}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}海塞加边行列式}{24}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}拟凹条件}{26}{subsubsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.3}非线性规划与库恩-塔克条件}{27}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}非负约束}{27}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}不等式约束}{27}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.4}极大值函数与包络定理}{28}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}无约束情况下的包络定理}{29}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}霍特林引理}{29}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}约束情况下的包络定理}{30}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}罗伊恒等式}{31}{subsubsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.5}谢泼德引理}{32}{subsubsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.5}总结}{33}{subsection.4.5}%
+\contentsline {section}{\numberline {5}动态学简介}{34}{section.5}%
+\contentsline {subsection}{\numberline {5.1}微分与差分方程}{34}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}动态最优化简介}{35}{subsection.5.2}%
+\contentsline {section}{\numberline {6}一阶微分方程}{36}{section.6}%
+\contentsline {subsection}{\numberline {6.1}常数系数和常数项}{36}{subsection.6.1}%
+\contentsline {paragraph}{齐次方程}{36}{paragraph*.2}%
+\contentsline {paragraph}{非齐次方程}{36}{paragraph*.3}%
+\contentsline {subsection}{\numberline {6.2}可变系数和可变项}{37}{subsection.6.2}%
+\contentsline {paragraph}{齐次方程}{37}{paragraph*.4}%
+\contentsline {paragraph}{非齐次方程}{37}{paragraph*.5}%
+\contentsline {subsection}{\numberline {6.3}恰当微分方程}{37}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}一阶一次非线性微分方程}{39}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}恰当微分方程}{39}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}可分离变量}{39}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}伯努利方程}{39}{subsubsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.5}均衡}{40}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}运用相位图进行定性分析}{40}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}以索洛增长模型为例进行分析}{41}{subsection.6.7}%
+\contentsline {section}{\numberline {7}高阶微分方程}{43}{section.7}%
+\contentsline {subsection}{\numberline {7.1}二阶微分方程}{43}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}特别积分}{43}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}余函数}{43}{subsection.7.3}%
+\contentsline {paragraph}{不同的实根}{44}{paragraph*.6}%
+\contentsline {paragraph}{重实根}{44}{paragraph*.7}%
+\contentsline {paragraph}{复根}{44}{paragraph*.8}%
+\contentsline {subsection}{\numberline {7.4}高阶微分方程与罗斯定理}{44}{subsection.7.4}%
+\contentsline {section}{\numberline {8}一阶差分方程}{45}{section.8}%
+\contentsline {section}{\numberline {9}高阶差分方程}{45}{section.9}%
+\contentsline {section}{\numberline {10}变分法的基本问题与一阶条件}{46}{section.10}%
+\contentsline {subsection}{\numberline {10.1}欧拉方程}{46}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}几种特殊情况下的欧拉方程与欧拉方程的扩展}{48}{subsection.10.2}%
+\contentsline {subsubsection}{\numberline {10.2.1}$F = F(t,y')$}{48}{subsubsection.10.2.1}%
+\contentsline {subsubsection}{\numberline {10.2.2}$F = F(y,y')$}{48}{subsubsection.10.2.2}%
+\contentsline {subsubsection}{\numberline {10.2.3}$F = F(y')$}{48}{subsubsection.10.2.3}%
+\contentsline {subsubsection}{\numberline {10.2.4}$F = F(t,y)$}{48}{subsubsection.10.2.4}%
+\contentsline {subsubsection}{\numberline {10.2.5}存在若干状态变量}{49}{subsubsection.10.2.5}%
+\contentsline {subsubsection}{\numberline {10.2.6}存在高阶导数}{49}{subsubsection.10.2.6}%
+\contentsline {subsection}{\numberline {10.3}例子：垄断企业的动态优化}{49}{subsection.10.3}%
+\contentsline {section}{\numberline {11}可变端点下的问题}{50}{section.11}%
+\contentsline {subsection}{\numberline {11.1}可变端点下的一般横截条件}{50}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}特殊的横截条件}{51}{subsection.11.2}%
+\contentsline {subsubsection}{\numberline {11.2.1}垂直终止线与截断垂直终止线}{51}{subsubsection.11.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.2}水平终止线与截断水平终止线}{52}{subsubsection.11.2.2}%
+\contentsline {subsubsection}{\numberline {11.2.3}终止曲线}{53}{subsubsection.11.2.3}%
+\contentsline {subsubsection}{\numberline {11.2.4}可变初始点}{53}{subsubsection.11.2.4}%
+\contentsline {subsubsection}{\numberline {11.2.5}多个状态变量}{53}{subsubsection.11.2.5}%
+\contentsline {subsubsection}{\numberline {11.2.6}高阶导数}{53}{subsubsection.11.2.6}%
+\contentsline {subsection}{\numberline {11.3}例子：劳动需求的最优调整}{53}{subsection.11.3}%
+\contentsline {section}{\numberline {12}变分法的二阶条件}{54}{section.12}%
+\contentsline {subsection}{\numberline {12.1}凹性与凸性的条件}{54}{subsection.12.1}%
+\contentsline {subsubsection}{\numberline {12.1.1}凹性与凸性的判断}{55}{subsubsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.2}勒让德条件}{56}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}一阶变分与二阶变分}{56}{subsection.12.3}%
+\contentsline {section}{\numberline {13}无限计划水平}{58}{section.13}%
+\contentsline {subsection}{\numberline {13.1}泛函的收敛}{58}{subsection.13.1}%
+\contentsline {subsubsection}{\numberline {13.1.1}条件1}{58}{subsubsection.13.1.1}%
+\contentsline {subsubsection}{\numberline {13.1.2}条件2}{58}{subsubsection.13.1.2}%
+\contentsline {subsubsection}{\numberline {13.1.3}条件3}{58}{subsubsection.13.1.3}%
+\contentsline {subsection}{\numberline {13.2}无限计划水平下的横截条件}{58}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}凹性与凸性的条件}{59}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}无限计划水平下的相图分析：简化的拉姆齐模型}{59}{subsection.13.4}%
+\contentsline {subsection}{\numberline {13.5}有限时间下的相图分析}{59}{subsection.13.5}%
+\contentsline {section}{\numberline {14}约束问题}{60}{section.14}%
+\contentsline {subsection}{\numberline {14.1}等式约束}{60}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}微分方程约束}{61}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}不等式约束}{61}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}等周长问题}{61}{subsection.14.4}%
+\contentsline {subsection}{\numberline {14.5}例子：可耗竭资源的经济学}{62}{subsection.14.5}%
+\contentsline {section}{\numberline {15}最优控制中的最大值原理}{63}{section.15}%
+\contentsline {subsection}{\numberline {15.1}最大值原理}{63}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}以变分法来看待最大值原理}{64}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}不同的终止条件}{66}{subsection.15.3}%
+\contentsline {subsubsection}{\numberline {15.3.1}固定终止点}{66}{subsubsection.15.3.1}%
+\contentsline {subsubsection}{\numberline {15.3.2}水平终止线}{66}{subsubsection.15.3.2}%
+\contentsline {subsubsection}{\numberline {15.3.3}终止曲线}{66}{subsubsection.15.3.3}%
+\contentsline {subsubsection}{\numberline {15.3.4}截断垂直终止线}{67}{subsubsection.15.3.4}%
+\contentsline {subsubsection}{\numberline {15.3.5}截断水平终止线}{67}{subsubsection.15.3.5}%
+\contentsline {subsection}{\numberline {15.4}自控问题的汉密尔顿函数的不变性}{67}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}例子：政治型经济周期}{67}{subsection.15.5}%
+\contentsline {section}{\numberline {16}最优控制的更多讨论}{68}{section.16}%
+\contentsline {subsection}{\numberline {16.1}最大值原理的一种经济学解释}{68}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}当前值汉密尔顿函数}{69}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}充分条件}{69}{subsection.16.3}%
+\contentsline {subsubsection}{\numberline {16.3.1}曼加萨林充分性定理}{69}{subsubsection.16.3.1}%
+\contentsline {subsubsection}{\numberline {16.3.2}阿罗充分性定理}{70}{subsubsection.16.3.2}%
+\contentsline {section}{\numberline {17}无限水平问题}{71}{section.17}%
+\contentsline {subsection}{\numberline {17.1}横截条件}{71}{subsection.17.1}%
+\contentsline {section}{\numberline {18}含有约束的最优化控制问题}{72}{section.18}%

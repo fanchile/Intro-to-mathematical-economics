@@ -1,0 +1,2694 @@
+\documentclass[UTF8,12pt]{ctexart}
+\usepackage{amsmath,amssymb,geometry,bm,graphicx,fontspec,amssymb,amsthm}
+\usepackage[mathscr]{euscript}
+
+\usepackage[colorlinks,
+linkcolor=black,
+anchorcolor=blue,
+citecolor=green
+]{hyperref} % 目录中的超链接
+
+\newtheorem{Def}{定义}[section]
+\newtheorem{Theo}{定理}[section]
+\newtheorem{Lemm}{引理}[section]
+\newtheorem{Axiom}{Axiom}
+
+\numberwithin{equation}{section} % 按章节进行排序与编号
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+\usepackage{draftwatermark} % 所有页加水印
+\SetWatermarkText{StudentF} % 设置水印内容
+\SetWatermarkLightness{0.97} % 设置水印透明度 0-1
+\SetWatermarkScale{1} % 设置水印大小    
+
+\title{数理经济学不完全指南} % 文档相关信息
+\author{StudentF}
+\date{\today}
+\geometry{scale=0.8}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\newpage
+	
+	\section{前言preface}
+	本指南基于蒋中一教授的《数理经济学的基本方法》与《动态最优化基础》两书进行编写，旨在将其中我认为比较重要的部分以简短精炼的形式进行总结。
+	
+	本指南内容大致可以分为两个部分。第一个部分为第二章至第四章，主要考虑了经济学中的静态分析。第二个部分则为剩下的内容，主要考虑了经济学中的动态分析。
+	
+	本指南并不意图提供一个非常严格的数学基础，因此本文的内容中并没有包含严格的证明，且在各种情况的推广中并没有进行严格的证明。本文意图介绍在经济学的分析中常用的数学工具，因此本文将着重于方法的介绍与应用。
+	
+	受限于本人的水平，如果文中出现错误，还望各位不吝言辞地批评与指正。可将您认为有误或者可以改进的内容发送至strand519519@163.com或直接发送至评论区，我会及时查阅并更正。
+	
+	在\href{https://space.bilibili.com/1465682770}{https://space.bilibili.com/1465682770}有着与本讲义配套的视频，如果对于视频有任何改进的建议，也可以通过同样的方法与我进行联系。
+	\newpage
+	
+	
+	\section{比较静态分析comparative statics}
+	在经济学的分析中，我们有时会关心很小的问题，例如在一个单一市场中均衡价格是如何决定的；我们也可能关心一个很大的问题，例如一个经济体增长的来源是什么。但是无论如何，我们都需要构建一个模型来描述我们想要研究的问题。
+	
+	模型中可能存在着许多的变量，例如对于消费者行为的研究中，所有商品的价格、消费量和消费者的收入都是模型中的变量。但是其中消费者对于商品的消费量是我们所关心的，这些模型解释的变量也被称为\textbf{内生变量}(endogenous variables)。而消费者的消费量又是由商品的价格和收入决定的，这些由模型外因素确定的变量则被称为\textbf{外生变量}(exogenous variable)。
+	
+	对一个模型最简单的分析就是静态分析与比较静态分析。本章主要介绍了对于模型进行比较静态分析的一般化方法。
+	
+	
+	\subsection{什么是比较静态分析}
+	
+	我们知道在一个经济学模型中存在着\textbf{外生变量}与\textbf{内生变量}。我们通常关心的是内生变量的均衡值。这也可以叫\textbf{静态分析}(static analysis)。
+	
+	最简单的一个静态分析就是对于一个简单市场模型的分析。在这个模型中给出了市场的供给函数$Q^s(P)$和需求函数$Q^d(P)$。我们想要知道的就是当市场处于均衡时（即$Q^s(P)=Q^d(P)$时），均衡的价格为多少。
+	
+	这就是一个简单的静态分析，在静态分析中我们关心的就是模型的\textbf{内生变量}$P$在均衡时是多少。
+	
+	那么在比较静态分析在静态分析上更进一步，我们关心的问题是\textbf{当外生变量变动时，内生变量是如何变化的}。
+	
+	那么在这里有不同的两组外生变量，而每一组外生变量都会形成一个新的均衡，在这两个均衡之间进行比较就是我们想进行的\textbf{比较静态分析}(compartive static analysis)。
+	
+	在这一章我们的目标是给出一个一般函数模型的比较静态分析方法。但是现在我们从一个简单的模型开始介绍比较静态分析。
+	
+	我们给出一个简单的国民收入模型，其中包含$Y,C,T$
+	\begin{equation}
+		\begin{aligned}
+			&Y = C + I_0 + G_0 \\
+			&C = \alpha + \beta(Y-T) \quad (\alpha > 0;0< \beta < 1) \\
+			&T = \gamma + \delta Y \quad (\gamma > 0; 0 < \delta < 1)
+		\end{aligned}
+	\end{equation}
+	其中包含了几个外生变量$I_0,G_0,\alpha,\beta,\gamma,\delta$
+	
+	通过求解模型我们就可以由外生变量来表示处于均衡时的收入$Y^*$。我们用上标来表示均衡值。
+	\begin{equation}
+		Y^* = \frac{\alpha - \beta\gamma + I_0 + G_0}{1 - \beta + \beta\delta}
+	\end{equation}
+	在这里，由于我们设定了$Y,C,T$的具体形式(即模型中的三个方程)，因此我们可以很容易地写出$Y$的\textbf{显式表达式}。
+	
+	在可以求出显示表达式的情况下，我们可以直接将$Y$对$G_0$进行求导，从而得到外生变量$G_0$对于内生变量$Y$均衡值的影响。
+	\begin{equation}
+		\frac{\partial Y^*}{\partial G_0} = \frac{1}{1-\beta+\beta\delta} > 0
+	\end{equation}
+	这个就是政府支出乘数。表示了政府支出变化一单位时国民收入变化了多少。
+	
+	这样我们就完成了一个比较静态分析。我们知道了当外生变量政府购买变化时，作为内生变量的国民收入，他的均衡值是如何变动的。
+	
+	\subsection{一般函数模型的比较静态分析}
+	在上述模型中，我们直接给出了国民收入模型中每个函数的形式。在这样的情况下，我们可以直接写出国民收入$Y^*$的显式解，进而根据显示解求偏导，完成比较静态分析就是一个比较简单的工作。
+	
+	但是有时候我们可能无法得到模型中内生变量的显示解。因此我们需要一个更加一般化的方法，帮助我们对于一般函数模型进行分析。
+	
+	\subsubsection{引言}
+	在这里我们用一个比之前复杂一点的国民收入模型为例，在这个模型中，均衡主要包括了两个市场的均衡：产品与服务市场、货币市场。具体来说可以用如下两个等式表示。
+	
+	第一个等式表示了产品与服务市场的均衡；第二个等式表示了货币市场的均衡。
+	\begin{equation}
+		\begin{aligned}
+			&Y = C(Y^d) + I(r) + G_0 \quad 0<C'(Y^d)<1,I'(r) < 0\\
+			&L(Y,r) = M_0^s \quad L_Y>0,L_r < 0 \\
+			&Y^d = Y-T(Y) \quad 0< T'(Y) < 1
+		\end{aligned}
+	\end{equation}
+	
+	虽然这里变量很多，但是我们主要关注的就是其中的内生变量$Y,r$。
+	很显然，在一般函数形式下，我们就无法像之前一样求出一个内生变量的具体函数$Y = f(G_0,M^s_0)$。相反的，我们只可以得到一些一般化的方程，例如$F(Y,r,G_0,M^s_0) = 0$。
+	
+	那么首先要问的问题就是：如果我们有了包含内生变量的一般化的方程，我们是否可以得到关于内生变量的函数呢？
+	
+	具体来说就是，如果我们有了$F(y,x_1,\cdots,x_m) = 0$。我们如何判断这个一般化的方程是否定义了一个隐函数，例如$y = f(x_1,\cdots,x_m)$。\textbf{隐函数定理}(The implicit function existence theorem)可以帮我们解决这个问题。
+	
+	\subsubsection{隐函数定理与隐函数求导}
+	\textbf{隐函数定理}：给定方程$F(y,x_1,\cdots,x_m) = 0$，如果满足如下条件
+	
+	1. 函数$F$具有连续偏导数$F_y,F_1,\cdots,F_m$
+	
+	2. 在点$(y_0,x_{10},\cdots,x_{m0})$满足方程$F(y,x_1,\cdots,x_m) = 0,F_y \neq 0$
+	
+	则存在一个$(x_{10},\cdots,x_{m0})$的$m$维邻域$N$，在此邻域中，$y$是变量$x_1,\cdots,x_m$隐性定义的函数，且函数形式为$y = f(x_1,\cdots,x_m)$
+	
+	在这个定理中比较重要的一个条件就是$F_y \neq 0$。我们需要注意的是在定理中所给出的条件是隐函数存在的充分条件，换句话说就是，当$F_y = 0$时，我们并不能确定隐函数不存在。
+	
+	那么通过隐函数定理，我们可以确定在之前的国民收入模型中，模型中的方程只要满足了一些特定的条件，那么这些方程其实就隐性定义了内生变量的函数（例如$Y = f(G_0,M^s_0)$）
+	
+	在我们确定了这种函数的存在后，为了完成关于内生变量的比较静态分析，我们的下一步就是求出内生变量关于外生变量的导数$\frac{\partial Y}{\partial G_0}$。
+	
+	但是我们现在拥有的只是一般的函数，无法将内生变量进行显示的表达，因此无法进行简单的求导。幸运的是我们对于隐函数也存在着求导的法则。
+	
+	我们还是用隐函数定理中的两个方程来推到如何进行求导。
+	首先我们有两个方程$F_1:F(y,x_1,\cdots,x_m) = 0$，$F_2:y = f(x_1,\cdots,x_m)$
+	如果$F$满足隐函数定理，那么我们就可以得知前一个方程中隐性定义了后一个方程。
+	
+	为了求导数，我们可以对这两个方程都求全微分，我们就可以得到
+	\begin{equation}
+		\begin{aligned}
+			&F'_ydy + F'_{x_1}dx_1 + \cdots + F'_{x_m}dx_m = 0 \quad (1) \\
+			&dy = f'_{x_1}dx_1 + \cdots + f'_{x_m}dx_m \quad (2)
+		\end{aligned}
+	\end{equation}
+	
+	由隐函数定理我们可以知道其实方程$F_1,F_2$定义了同一个方程，因此我们可以将上述(2)式带入(1)式中。我们就可以得到如下的式子
+	\begin{equation}
+		(F'_yf'_{x_1} + F'_{x_1})dx_1 + \cdots + (F'_yf'_{x_m} + F'_{x_m})dx_m \equiv 0
+	\end{equation}
+	由于上面一个是一个恒等式，且微分$dx_1,\cdots,dx_m$都可以取任意值，因此我们可以得到一系列的等式
+	\begin{equation}
+		F'_yf'_{x_1} + F'_{x_1} = 0,\cdots,F'_yf'_{x_m} + F'_{x_m} = 0
+	\end{equation}
+	由此我们就可以在不用求出$f$的具体表达式的情况下，得到$f$的偏导数
+	\begin{equation}
+		f'_{x_m} = \frac{df}{dx_m}= - \frac{F'_{x_m}}{F'_y}
+	\end{equation}
+	
+	从这里我们也可以知道为什么一定要在满足隐函数存在定理后，我们才能使用这个方法对隐函数进行求导。在隐函数定理中存在这一个条件$F'_y \neq 0$，而我们通过隐函数求导中，$F'_y$是作为分母存在的，而分母不能为0。
+	
+	\subsubsection{联立方程组中的隐函数定理与求导}
+	那么以上就是针对一个变量$y$和一个方程$F(y,x_1,\cdots,x_m)$，我们所运用隐函数存在定理与隐函数求导的方法进行一个比较静态分析的过程。这个略微补足了我们对于一般函数模型分析的数学基础，但还不够。
+	
+	在我们的一般函数模型中，可能不止存在一个我们想要研究的内生变量，因此可能不止存在一个方程。
+	
+	为了使我们分析的方法能够适应更加多的情况，我们需要将上述分析的方法进行扩展，从而使得上述对于隐函数的分析方法能够运用于联立方程组的情况。
+	
+	那么我们首先就考虑联立方程组形式中的隐函数存在定理。
+	
+	对于一个联立方程组
+	\begin{equation}
+		\begin{aligned}
+			F^1(y_1,\cdots,y_n;x_1,\cdots,x_m) = 0 \\
+			F^2(y_1,\cdots,y_n;x_1,\cdots,x_m) = 0 \\
+			\cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \\
+			F^n(y_1,\cdots,y_n;x_1,\cdots,x_m) = 0 \\
+		\end{aligned} 
+	\end{equation}
+	
+	定义了一组隐函数
+	\begin{equation}
+		\begin{aligned}
+			y_1 = f^1(x_1,\cdots,x_m) \\
+			y_2 = f^2(x_1,\cdots,x_m) \\
+			\cdots \cdots \cdots \cdots \cdots \cdots  \\
+			y_n = f^n(x_1,\cdots,x_m) \\
+		\end{aligned}
+	\end{equation}
+	需要满足如下的条件：
+	
+	1. 对于方程组$(9)$所有变量，$F^1,\cdots,F^n$均具有连续偏导数
+	
+	2. 点$(y_{10},\cdots,y_{n0};x_{10},\cdots,x_{m0})$满足方程组$(9)$，且下述\textbf{雅可比行列式}(Jacobian)不为0
+	\begin{equation}
+		|J| \equiv |\frac{\partial (F^1,\cdots,F^n)}{\partial (y_1,\cdots,y_n)}| \equiv
+		\begin{vmatrix}
+			\frac{\partial F^1}{\partial y_1} & \frac{\partial F^1}{\partial y_2} & \cdots & \frac{\partial F^1}{\partial y_n} \\
+			\frac{\partial F^2}{\partial y_1} & \frac{\partial F^2}{\partial y_2} & \cdots & \frac{\partial F^2}{\partial y_n} \\
+			\cdots &\cdots&\cdots &\cdots  \\
+			\frac{\partial F^n}{\partial y_1} & \frac{\partial F^n}{\partial y_2} & \cdots & \frac{\partial F^n}{\partial y_n} \\
+		\end{vmatrix}
+		\neq 0
+	\end{equation}
+	
+	如果满足上述条件，则在$(x_{10},\cdots,x_{m0})$的$m$维邻域$N$内，变量$(y_{1},\cdots,y_{n})$是$(x_{1},\cdots,x_{m})$的函数，且满足
+	
+	\begin{equation}
+		\begin{aligned}
+			&y_{10} = f^1(x_{10},\cdots,x_{m0}) \\
+			&\cdots \cdots \cdots \cdots \cdots \cdots \cdots  \\
+			&y_{n0} = f^n(x_1,\cdots,x_{m0}) \\
+		\end{aligned} 
+	\end{equation}
+	
+	当然，在联立方程组中，我们除了需要知道隐函数的存在，为了完成比较静态分析，我们还需要知道这些函数的导数。
+	
+	在联立方程组中，求导数和之前的单方程求导数的方法类似。我们先对方程组$(9)(10)$进行求全微分，分别得到$(13)(14)$。
+	
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial F^1}{\partial y_1}dy_1 + \frac{\partial F^1}{\partial y_2}dy_2 + \cdots + \frac{\partial F^1}{\partial y_n}dy_n 
+			=  - (\frac{\partial F^1}{\partial x_1}dx_1 + \cdots + \frac{\partial F^1}{\partial x_m}dx_m), \\
+			\frac{\partial F^2}{\partial y_1}dy_1 + \frac{\partial F^2}{\partial y_2}dy_2 + \cdots + \frac{\partial F^2}{\partial y_n}dy_n 
+			=  - (\frac{\partial F^2}{\partial x_1}dx_1 + \cdots + \frac{\partial F^2}{\partial x_m}dx_m), \\
+			\cdots \cdots \cdots \cdots \\
+			\frac{\partial F^n}{\partial y_1}dy_1 + \frac{\partial F^n}{\partial y_2}dy_2 + \cdots + \frac{\partial F^n}{\partial y_n}dy_n 
+			=  - (\frac{\partial F^n}{\partial x_1}dx_1 + \cdots + \frac{\partial F^n}{\partial x_m}dx_m) \\
+		\end{aligned}
+	\end{equation}
+	
+	\begin{equation}
+		\begin{aligned}
+			dy_1 = \frac{\partial y_1}{\partial x_1}dx_1 + \frac{\partial y_1}{\partial x_2}dx_2 + \cdots + \frac{\partial y_1}{\partial x_m}dx_m \\
+			dy_2 = \frac{\partial y_2}{\partial x_1}dx_1 + \frac{\partial y_2}{\partial x_2}dx_2 + \cdots + \frac{\partial y_2}{\partial x_m}dx_m \\
+			\cdots \cdots \cdots \cdots \\
+			dy_n = \frac{\partial y_n}{\partial x_1}dx_1 + \frac{\partial y_n}{\partial x_2}dx_2 + \cdots + \frac{\partial y_n}{\partial x_m}dx_m \\
+		\end{aligned}
+	\end{equation}
+	
+	我们可以将$(14)$式带入$(13)$中从而消去$dy_i$。
+	
+	但是式子中还会有许多的$dx_i$。由于在微分中$dx_i$可以取任何值，因此为了简化分析，我们不妨令$dx_1 \neq 0,dx_2 = \cdots = dx_m = 0$。并在带入后将两边同时除以$dx_1$.这样我们就可以得到如下的方程组
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial F^1}{\partial y_1}\left(\frac{\partial y_1}{\partial x_1}\right) + 
+			\frac{\partial F^1}{\partial y_2}\left(\frac{\partial y_2}{\partial x_1}\right) + 
+			\cdots +
+			\frac{\partial F^1}{\partial y_n}\left(\frac{\partial y_n}{\partial x_1}\right) = -\frac{\partial F^1}{\partial x_1}, \\
+			\frac{\partial F^2}{\partial y_1}\left(\frac{\partial y_1}{\partial x_1}\right) + 
+			\frac{\partial F^2}{\partial y_2}\left(\frac{\partial y_2}{\partial x_1}\right) + 
+			\cdots +
+			\frac{\partial F^2}{\partial y_n}\left(\frac{\partial y_n}{\partial x_1}\right) = -\frac{\partial F^2}{\partial x_1}, \\
+			\cdots \cdots \cdots \cdots \cdots \cdots \\
+			\frac{\partial F^n}{\partial y_1}\left(\frac{\partial y_1}{\partial x_1}\right) + 
+			\frac{\partial F^n}{\partial y_2}\left(\frac{\partial y_2}{\partial x_1}\right) + 
+			\cdots +
+			\frac{\partial F^n}{\partial y_n}\left(\frac{\partial y_n}{\partial x_1}\right) = -\frac{\partial F^n}{\partial x_1}, \\
+		\end{aligned}
+	\end{equation}
+	
+	我们也可以用矩阵的形式来表示上述的方程组
+	
+	\begin{equation}
+		\begin{bmatrix}
+			\frac{\partial F^1}{\partial y_1} & \frac{\partial F^1}{\partial y_2} & \cdots & \frac{\partial F^1}{\partial y_n} \\
+			\frac{\partial F^2}{\partial y_1} & \frac{\partial F^2}{\partial y_2} & \cdots & \frac{\partial F^2}{\partial y_n} \\
+			\cdots & \cdots & \cdots & \cdots \\
+			\frac{\partial F^n}{\partial y_1} & \frac{\partial F^n}{\partial y_2} & \cdots & \frac{\partial F^n}{\partial y_n} \\
+		\end{bmatrix}
+		\begin{bmatrix}
+			(\frac{\partial y_1}{\partial x_1}) \\
+			(\frac{\partial y_2}{\partial x_1}) \\
+			\vdots \\
+			(\frac{\partial y_n}{\partial x_1}) \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			-\frac{\partial F^1}{\partial x_1} \\
+			-\frac{\partial F^2}{\partial x_1} \\
+			\vdots \\
+			-\frac{\partial F^n}{\partial x_1} \\
+		\end{bmatrix}
+	\end{equation}
+	
+	在这里，我们可以看到我们这个矩阵有$Ax=b$的形式。其中$A$和我们之前求出的雅可比行列式相同。而其中的$x$就是我们想求解的偏导数。
+	
+	由于在联立方程组中，我们有$n$个因变量$y_i$，且有$m$个自变量$x_i$。由于我们在求出这个方程组之前固定了除$dx_1$以外的所有关于$x$的微分。因此在这里我们只能求出所有的$y_i$对$x_1$的偏导数。
+	
+	同样的，我们可以固定不同的$dx_i$并求出所有$y_i$对$x_i$的导数，这样我们就可以得到所有隐函数对于其自变量的导数了。基于此我们就可以对于经济模型继续进行比较静态分析。
+	
+	基于上述我们介绍的这些理论，在给定一个形同$(9)$的方程组后，我们就可以得到任意$y_i$对$x_i$的导数了。换句话说，给定一个经济模型，我们就可以得到模型中任意的外生变量对于内生变量的导数了。这样我们就可以进行比较静态分析了。
+	
+	当然，通过抽象的数学语言，我们可能无法很好地理解对于这些理论的应用。在这里我们就用一个常见的经济模型进行比较静态分析。从而加深我们的理解。
+	
+	\subsubsection{例子}
+	我们以国民收入模型为例子进行说明。具体来说我们以计算乘数为例。
+	
+	在这里我们还是考虑一个国民收入模型，在这个模型中，均衡主要包括了两个市场的均衡：产品与服务市场、货币市场。具体来说可以用如下两个等式表示
+	\begin{equation}
+		\begin{aligned}
+			&Y = C(Y^d) + I(r) + G_0 \quad &&0<C'(Y^d)<1,I'(r) < 0\\
+			&L(Y,r) = M_0^s \quad &&L_Y>0,L_r < 0 \\
+			&Y^d = Y-T(Y) \quad &&0< T'(Y) < 1
+		\end{aligned}
+	\end{equation}
+	
+	其中第一个等式表示了产品与服务市场的均衡。第一个等式说明了国民收入由三部分组成：消费、投资、政府购买。其中消费是可支配收入$Y^d$的函数，可支配收入为收入减去税收。
+	
+	第二个等式表示了货币市场的均衡，货币的需求由收入与利率来决定。
+	
+	除此以外整个模型还包含了一些关于导数的信息，这些导数都代表了一些基本的假设。
+	
+	我们可以对上式进行整理得到两个隐函数的方程组，同样也是两个衡等式
+	\begin{equation}
+		\begin{aligned}
+			Y - C(Y^d) - I(r) - G_0 \equiv 0 \\
+			L(Y,r) - M_0^s \equiv 0\\
+		\end{aligned}
+	\end{equation}
+	
+	首先我们需要验证的隐函数是否存在，这一步可以使用雅可比行列式进行计算。
+	
+	\begin{equation}
+		\begin{aligned}
+			|J| &= 
+			\begin{vmatrix}
+				1-C'(1-T')  & -I' \\
+				L_{Y} & L_{r} \\
+			\end{vmatrix} \\
+			&= [1-C'(1-T')]L_r + I'L_Y < 0
+		\end{aligned}		 
+	\end{equation}
+	
+	
+	
+	通过拉\textbf{普拉斯展开}(Laplace expansion)我们可以知道$|J|$恒小于0，根据隐函数存在定理，我们可以写出隐函数
+	\begin{equation}
+		\begin{aligned}
+			Y^* = Y^*(G_0,M_0^s) \\
+			r^* = r^*(G_0,M_0^s) \\
+		\end{aligned}
+	\end{equation}
+	
+	接下来我们想要求的就是上述函数的导数，具体来说就是$\frac{\partial Y^*}{\partial G_0},\frac{\partial Y^*}{\partial M_0^s},\frac{\partial r^*}{\partial G_0},\frac{\partial r^*}{\partial M_0^s}$
+	
+	为了得到这些偏导数，我们可以运用之前所介绍的理论。首先我们对于$(18)$求全微分
+	\begin{equation}
+		\begin{aligned}
+			[1-C'(1-T')]dY -I'dr & \equiv dG_0 \\
+			L_YdY + L_rdr & \equiv dM_0^s 
+		\end{aligned}
+	\end{equation}
+	根据隐函数，我们把整个方程组进行微分，可以写成如下的形式
+	\begin{equation}
+		\begin{bmatrix}
+			1-C'(1-T') & -I'  \\
+			L_Y & L_r  \\
+		\end{bmatrix}	
+		\begin{bmatrix}
+			dY^* \\
+			dr^* \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			dG_0 \\
+			dM^s_0 \\
+		\end{bmatrix}
+	\end{equation}
+	
+	我们首先设定$dM_0^s = 0$，然后将左右同时除以$dG_0$，这样我们就可以得到如下的方程组
+	
+	\begin{equation}
+		\begin{bmatrix}
+			1-C'(1-T') & -I'  \\
+			L_Y & L_r  \\
+		\end{bmatrix}		
+		\begin{bmatrix}
+			\frac{dY^*}{dG_0} \\
+			\frac{dr^*}{dG_0} \\
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			1 \\
+			0 \\
+		\end{bmatrix}
+	\end{equation}
+	
+	求解这个方程组我们就可以很简单的得到两个偏导数$\frac{\partial Y^*}{\partial G_0},\frac{\partial r^*}{\partial G_0}$。运用\textbf{克莱默法则}(Cramer's Rule)我们可以很容易地求解上述的方程组，得到
+	\begin{equation}
+		\begin{aligned}
+			&\frac{dY^*}{dG_0} = \frac{
+				\begin{vmatrix}
+					1 & -I'\\
+					0 & L_r
+				\end{vmatrix}
+			}{|J|}
+			=\frac{L_r}{|J|} > 0 \\			
+			&\frac{dr^*}{dG_0} = \frac{
+				\begin{vmatrix}
+					1-C'(1-T') & 1  \\
+					L_Y & 0  \\
+				\end{vmatrix}
+			}{|J|}
+			=\frac{-L_Y}{|J|} > 0
+		\end{aligned}
+	\end{equation}
+	
+	根据隐函数定理，我们可以把微分的比例解释成偏导数，这样我们就得到了$G_0$对于$r,Y$均衡值的影响。
+	
+	其中$\frac{\partial Y^*}{\partial G_0}$就是我们熟悉的政府购买乘数。那如果我们想知道另外两个偏导数$\frac{\partial Y^*}{\partial M_0^s},\frac{\partial r^*}{\partial M_0^s}$。我们就用$(6)$并设定$dG_0 = 0$，然后将左右同时除以$dM^s_0$重新计算。
+	
+	\subsection{总结}
+	本章我们首先介绍了什么是\textbf{比较静态分析}。并给出了一个简单例子。在这个例子中，我们可以将内生变量\textbf{显式}地表达外生变量的函数，因此对外生变量求偏导就可以得到外生变量对于均衡的影响。
+	
+	为了一般化我们的分析，使得对于不能求出内生变量显式解的模型也能进行比较静态分析，通常来说整个分析包含两步，首先通过\textbf{隐函数存在定理}来确定内生变量表达式的存在性。其次使用隐函数求导法则来确定外生变量变化对于内生变量的影响。
+	
+	最后，我们通过一个例子说明了如何运用隐函数定理对于一个一般化的经济模型进行比较静态分析。
+	
+	\newpage
+	\section{无约束条件下的最优化unconstrained optimal} 
+	\subsection{为什么要最优化}
+	
+	在静态的分析中，我们的研究目标主要着眼于均衡。而我们所研究的均衡可以分为两种：\textbf{非目标均衡}与\textbf{目标均衡}。
+	
+	最常见的\textbf{非目标均衡}就是一个简单的市场模型，就市场而言，供给与需求并没有谋求一个特定的目标，只是关于市场的所有因素决定了市场的均衡价格与数量。
+	
+	而最常见的\textbf{目标均衡}就是消费者的效用最大化。在这个分析中，消费者会选择自己的消费束来实现效用最大化。在这里消费者效用最大化的消费就是一个目标均衡。
+	
+	在我们感兴趣的经济问题中包含着许多的最优化问题。因此我们需要一个更加坚实的数学基础来完成对于这些最优化的问题。
+	
+	\subsection{最优化问题是什么}
+	
+	首先我们要在数学上表述一下什么是最优化问题。这样我们可以将最优化的分析框架扩展到更多的具体问题中。
+	
+	为了阐述一个最优化问题，我们首先要确定一个目标函数。函数的因变量就是我们想要最大化的目标；而函数中的自变量则被称为选择变量。
+	
+	求解最优化问题的过程就是我们选择一组选择变量使得目标函数最大化的过程。在数学上来说，就是求解目标函数的极大值。
+	
+	\subsection{单个选择变量下的最优化}
+	
+	我们先介绍一个最简单的情况，即单个选择变量下的最优化。用数学的语言来表达的话就是我们的目标函数为$y = f(x)$，我们通过选择$x$来求$f(x)$的极值(极大值或极小值)。
+	
+	在数学上这是一个很简单的问题。在求解极值问题中我们需要两个条件，即一阶条件和二阶条件。
+	
+	\subsubsection{一阶条件}
+	
+	一阶条件确定了函数取在极值点时，极值点的一阶导数。
+	
+	如果函数在$x = x_0$处取到极值，那么我们就知道一阶导满足以下两个条件之一
+	
+	1. $f'(x)$不存在
+	
+	2. $f'(x_0) = 0$
+	
+	在这里，我们用导数表示了一阶条件。同样的，我们可以使用微分来进行一阶条件的表示。由于$dy = f'(x)dx$，那么我们可以将一阶条件中的第二条表示为微分形式。
+	
+	\textbf{微分形式的一阶条件}：对于任意非零的$dx,dy = 0$。
+	
+	一阶条件只是极值存在的\textbf{必要条件}，为了确定极值是极大值还是极小值，我们还需要二阶条件进行判断。
+	
+	\subsubsection{二阶条件}
+	
+	如果在$x = x_0$处，$f(x)$取到极大值，那么函数的图像一定有凸的形状，且凸出的点为$x_0$。那么我们就可以知道在$x = x_0$附近的一阶导的大小。
+	
+	在上述情况下，当$x$在$x_0$的左领域时，$f'(x) > 0$；当$x$在$x_0$的右领域时，$f'(x) < 0$。可以看出$f'(x)$存在着一个递减的趋势，由此我们可以用二阶导来描述上述的条件。
+	
+	\textbf{二阶条件}：极大值：$f''(x) < 0$；极小值：$f''(x) > 0$
+	
+	在一阶条件中，我们给出了一阶条件的导数和微分形式。对于二阶条件来说，我们同样也有微分的形式。在单变量的情况下，我们可以知道$d^2y = f''(x)dx^2$。
+	
+	由于$dx^2$总是为正，因此$d^2y$总是和$f''(x)$符号相同，因此我们就可以写出二阶条件的微分形式
+	
+	\textbf{二阶条件的微分形式}：极大值$d^2y < 0$；极小值$d^2y > 0$，对于任意的非零$dx$
+	
+	在这里我们还需要注意二阶条件只是极值判断的\textbf{充分条件}，而不是必要条件。
+	
+	二阶导在数学上其实与函数的曲率有着关系，且根据二阶导数我们可以将函数分为凸函数与凹函数。
+	
+	凹函数与凸函数在函数图像上有着很大的不同，因此除了用二阶导进行判断，我们也可以使用函数图像的特征来进行二阶条件的判断。利用函数的凹性或凸性来判断。
+	
+	\subsection{两个选择变量下的最优化}
+	
+	在单个选择变量的情况下，最优化问题的一阶条件与二阶条件比较简单。很自然的，为了一般化我们的分析，我们需要扩展到多个变量情况下的分析。
+	
+	首先我们从两个变量的情况下进行分析。这是我们的目标函数为$z = f(x,y)$
+	
+	我们可以直接利用单选择变量情况下的微分条件进行扩展，从而得到多选择变量的条件。
+	
+	\subsubsection{一阶条件}
+	在两变量的情况下，我们的一阶条件如下
+	
+	\textbf{一阶条件的微分形式}：$dz = 0$对于任意的$dx,dy \neq 0$
+	
+	我们又有全微分$dz = f_x'dx + f_y'dy$来联系微分与导数，基于此我们可以推导出一阶的导数条件。
+	
+	\textbf{一阶条件的导数形式}：$f_x'(x,y) = f_y'(x,y) = 0$
+	
+	\subsubsection{二阶条件}
+	
+	我们可以直接利用单个选择变量下的微分条件得出多变量情况下的二阶条件的微分形式
+	
+	\textbf{二阶充分条件的微分形式}：极大值$d^2z < 0$；极小值$d^2z > 0$，对于任意不同时为0的$dx,dy$
+	
+	\textbf{二阶必要条件的微分形式}：极大值$d^2z \leqslant 0$；极小值$d^2z \geqslant 0$，对于任意不同时为0的$dx,dy$
+	
+	值得注意的一点是二阶充分条件与必要条件之前的区别。即使不满足二阶充分条件，也有可能是极值。
+	
+	我们可以根据二阶微分与二阶导数的关系，将微分形式转换为导数形式。但是两者之间的转换并不如一阶条件这么简单。
+	
+	我们可以知道二阶微分$d^2z \equiv f_{xx}dx^2 + 2f_{xy}dxdy + f_{yy}dy^2$
+	
+	在这里我们想知道$f_{xx}dx^2 + 2f_{xy}dxdy + f_{yy}dy^2$取什么符号。但是在这个式子中包含着两个可以变动的量$dx,dy$。因此我们需要借助一些数学工具进行分析。
+	
+	如果将$dx,dy$看作是变量，那么我们就可以将上述式子视为一个全部是二次项的多项式，这就是一个\textbf{二次型}，而我们可以用矩阵来表示二次型。
+	
+	我们进行如下变量的设置
+	\begin{equation}
+		dx = u, \ dy = v, \ f_{xx} = a, \ f_{yy} = b, \ f_{xy} = f_{yx} = c
+	\end{equation}
+	
+	如果设$d^2z = q$，那么
+	\begin{equation}
+		q = au^2 + bv^2 + 2cuv 
+		=
+		\begin{bmatrix}
+			u & v
+		\end{bmatrix}
+		\begin{bmatrix}
+			a & c \\
+			c & b
+		\end{bmatrix}
+		\begin{bmatrix}
+			u \\
+			v
+		\end{bmatrix} 
+	\end{equation}
+	
+	因此我们看到，矩阵$\begin{bmatrix}
+		a & c \\
+		c & b
+	\end{bmatrix}$定义了一个二次型。同样也定义了一个二次多项式。
+	
+	现在，回顾一下最初的问题。我们的问题是如何根据二次型矩阵中的元素(即二阶偏导数)来判断这个二次多项式的正负。
+	
+	这个问题正好涉及到了二次型的正定与负定的概念。如果二次型$q$恒$>0$，则我们称该二次型为\textbf{正定}；如果二次型$q$恒$\geqslant 0$，则我们称该二次型为\textbf{半正定}。我们也可以通过同样的方法来定义\textbf{负定}与\textbf{半负定}
+	
+	而我们可以知道，二次型的正定正好满足了极小值的二阶充分条件；负定则正好满足了极大值的二阶充分条件。(因为在我们这里的问题中，二阶微分$d^2z = q$)
+	
+	通过不断的深入分析，我们现在将问题转化为了如何判断二次型的正定与负定的问题。在这里，我们介绍两种方法
+	
+	\subsubsection{二次型有定符号的行列式检验}
+	
+	我们可以通过二次型矩阵的行列式来进行有定符号的检验。具体来说，我们需要的是系数矩阵的行列式$\begin{vmatrix}
+		a & c \\
+		c & b
+	\end{vmatrix}$，这个行列式也叫做\textbf{判别式}。
+	
+	我们通过判别式的顺序主子式进行有定符号的判断。具体来说，对于这个例子中的二阶行列式，我们就判断一阶主子式$D_1 = \begin{vmatrix}
+		a
+	\end{vmatrix}$和二阶主子式$D_2 = \begin{vmatrix}
+		a & c \\
+		c & b
+	\end{vmatrix}$
+	
+	如果一阶主子式$D_1$和二阶主子式$D_2$都大于0，那么我们就可以得知该二次型正定。如果我们一阶主子式$D_1$小于0，二阶主子式$D_2$大于0，那么我们就可以得知该二次型负定。
+	
+	我们可以将判定方法扩展到$n$阶判定式的情况。
+	
+	如果$D_i(i = 1,\cdots,n)$恒大于0，那么二次型正定。
+	
+	如果$(-1)^iD_i(i = 1,\cdots,n)$恒大于0，那么二次型负定。
+	
+	在这里我们就基本了解了有定符号的行列式检验。但是我们还可以更加仔细的分析一下行列式中的元素与偏导数的关系。
+	
+	在两变量的情况下，我们可以将判别式的行列式写为如下的形式，而这样形式的行列式也被称为\textbf{海塞行列式}
+	\begin{equation}
+		|H| =
+		\begin{vmatrix}
+			f_{xx} & f_{xy} \\
+			f_{yx} & f_{yy}
+		\end{vmatrix}
+	\end{equation}
+	
+	对于一个任意的多元函数$y = f(x_1,\cdots,x_n)$，我们都可以写出海塞行列式
+	\begin{equation}
+		|H| =
+		\begin{vmatrix}
+			f_{11} &\cdots & f_{1n} \\
+			\vdots & \ddots & \vdots \\
+			f_{n1} & \cdots&f_{nn}
+		\end{vmatrix}
+	\end{equation}
+	
+	在这里我们可以先简单地总结一下我们用行列式来进行的有定判定的方法。对于一个有着多个选择变量的函数$y = f(x_1,\cdots,x_n)$当判定二阶条件时，我们有以下步骤：
+	
+	1.我们可以基于函数的二阶偏导数求出海塞行列式。
+	
+	2.海塞行列式正定就是函数有极小值的二阶充分条件；海塞行列式负定就是函数有极大值的二阶充分条件。
+	
+	3.行列式的正定和负定我们可以通过计算海塞行列式的顺序主子式，并通过顺序主子式的符号进行判断。
+	
+	\subsubsection{二次型有定符号的特征根检验}
+	
+	有定符号的特征根检验涉及到矩阵的特征值与特征向量的计算。在这里我们简单的提一下。
+	
+	对于一个矩阵$P$，如果存在着向量$x$与实数$r$满足$Px = rx$。那么我们就说$x$是矩阵的特征向量，$r$是矩阵的特征值。
+	
+	而这里的矩阵的特征值与矩阵表示的二次型的正定与负定存在着关系。我们可以利用特征值与特征向量将判定式矩阵转换为对角矩阵，且对角矩阵上的值都为特征值。这样我们就将一个包含着$x_ix_j$这种交互项的二次型转换成了只包含$x_i^2$二次项的二次型。然后我们就可以给出有定符号的特征根检验。
+	
+	\textbf{二次型有定符号的特征根检验}
+	
+	1.如果$D$的特征值所有特征根都为正，那么二次型$q = u'Du$正定
+	
+	2.如果$D$的特征值所有特征根都为负，那么二次型$q = u'Du$负定
+	
+	同样的我们可以弱化不等式，从而得到半正定与半负定的定义。
+	
+	到这里，我们进行以下总结。我们将二阶条件中求二阶微分的正负转换为了一个求二次型正定与负定的问题。然后我们介绍了两种判定有定符号的方法，并对其中一种方法进行了推导。
+	
+	到这里我们最终完成了两个选择变量下的最优化分析。
+	
+	在这里，我们需要注意的一点是：上述多选择变量下的一阶条件与二阶条件与单变量的情况一样。一阶条件为必要条件，二阶条件为充分条件。
+	
+	我们导出了在两个选择变量下的最优化的两个条件。我们可以很简单地推导到多个选择变量的情况下。
+	
+	\subsection{多个选择变量下的最优化}
+	
+	我们可以简单地将两个选择变量下的最优化条件进行扩展，进而得到一阶条件与二阶条件。在这里，我们选择最优化的目标函数为$y = f(x_1,x_2,\cdots,x_n)$
+	
+	\subsubsection{一阶条件}
+	\textbf{一阶条件的微分形式}：$dy = 0$对于任意的$dx_1,dx_2,\cdots,dx_n \neq 0$
+	
+	\textbf{一阶条件的导数形式}：$f'_1 = f'_2 = \cdots = f'_n = 0$
+	
+	\subsubsection{二阶条件}
+	\textbf{二阶条件的微分形式}：极大值$d^2y < 0$；极小值$d^2y > 0$，对于任意不同时为0的$dx_1,dx_2,\cdots,dx_n$。
+	
+	\textbf{二阶条件的导数形式}：在导数形式中，我们首先需要构建海塞矩阵
+	\begin{equation}
+		|H| = 
+		\begin{bmatrix}
+			f_{11} & f_{12} &\cdots & f_{1n} \\
+			f_{21} & f_{22} &\cdots & f_{2n} \\
+			\vdots & \vdots &\ddots & \vdots \\
+			f_{n1} & f_{n2} & \cdots&f_{nn}
+		\end{bmatrix}
+	\end{equation}
+	
+	海塞矩阵中的元素都为目标函数的二阶导数。我们可以利用行列式计算主子书的正负，从而判断二阶条件；我们也可以先计算海塞矩阵的特征值，根据特征值的正负取值判断二阶条件。
+	
+	\subsection{二阶条件与目标函数的凹性与凸性}
+	
+	在我们之前的二阶条件的表述中，我们全部使用的是代数语言，无论是二阶的微分还是海塞矩阵。但是还有一个很简单的方法来理解二阶条件。
+	
+	如果在满足一阶条件的点上，附近的图像是如同山峰一样的形状，那么这个点就是极大值点；相反的，如果图像是如同谷底一样的形状，那么这个点就是极小值点。
+	
+	而这种图像如同山峰或谷底一样的性质，其实可以用函数的凸性与凹性来表述。
+	
+	如果函数是凸性的，那么就表示函数的图像凸向原点，那么图像就有谷底的形状；如果函数是凹性的，那么函数的图像就凹向原点，那么图像就有山峰的形状。
+	
+	在之前我们求出的二阶条件的微分形式也是在这种图像的性质下得到的，因此当我们拥有了函数的凸性与凹性，我们就可以利用凹性与凸性来替代二阶条件。
+	
+	\subsubsection{如何判断凸性与凹性}
+	
+	在一元与二元的情况下，我们还是可以非常简单地利用函数图像来判断凸性与凹性。但是当遇到多元的情况下，我们就需要使用代数的方法来判断凸性。
+	
+	首先我们可以根据凸性与凹性的定义进行判断。
+	
+	对于函数$f$定义域内的任意两点$u,v$，且对于$\theta \in (0,1)$。当
+	\begin{equation}
+		\theta f(u) + (1 - \theta) f(v) \leqslant 
+		f[\theta u + (1 - \theta) v]
+	\end{equation}
+	$f$为凹函数。反之为凸函数。
+	
+	将定义中的弱不等号换为严格不等号，我们就可以得到严格凹与严格凸的定义。上述的定义也有着图像上的意义。不等号的左边代表了两点之间线段的高度，而不等号右边代表了两点之间函数构成的弧的高度。如果线段的高度低于弧的高度，那么函数就凹向远点，也就是凹函数。
+	
+	如果函数是可微的，那么我们就可以得到另一种判断函数凹性与凸性的方法。
+	
+	对于定义中的任意两点$u = (u_1,\cdots,u_n),v = (v_1,\cdots,v_n)$，当且仅当
+	\begin{equation}
+		f(v) \leqslant f(u) + \sum_{j = 1}^{n}f_j(u)(v_j - u_j)	\end{equation}
+	可微函数$f$为凹函数，反之同理。
+	
+	\subsection{总结}
+	
+	本章我们用数学的语言分析了在经济学中常见的一个问题——最优化问题。最优化问题通常可以描述为我们如何选择特定的选择变量从而使得目标函数取到极大值或极小值。
+	
+	在最优化问题中，最核心的问题就是如何判断当选择变量取什么值时达到最优化。我们通常使用一阶条件与二阶条件来进行判断，当选择变量满足特定的一阶条件与二阶条件时，这时候目标函数就达到了最优化。
+	
+	接下来的问题就是如何推导一阶条件与二阶条件。我们从最简单的单个选择变量为基础，不断将我们的结论扩展到两个选择变量与多个选择变量的情况。
+	
+	在二阶条件的推导过程中，我们介绍了二阶条件与二次型的关系，并介绍了判断二次型正定与负定的两种方法。
+	
+	我们还研究了二阶条件与最优化过程中，目标函数的凸性与凹性的关系。如果函数满足了凸性，那么在计算极小值时我们就不需要进行二阶条件的验证了。
+	
+	\newpage
+	
+	\section{约束条件下的最优化constrainted optimal}
+	\subsection{拉格朗日乘数法}
+	
+	在这里，我们直接对于约束条件下最优化问题的求解条件进行分析。首先我们想到求解这个问题的方法肯定就是拉格朗日乘数法，但是在这里我们需要对于约束条件下的最优化问题进行更加严谨的表达，并且我们需要意识到拉格朗日乘数法只是一阶条件。
+	
+	我们首先这里我们要研究的问题进行表述，通常来说问题都有如下的形式
+	\begin{align}
+		&max \quad target \ function = f(x,y) \\
+		&s.t. \quad g(x,y) = c
+	\end{align}
+	即我们在一个等式约束$g(x,y) = c$下最大化目标函数$f(x,y)$，因为等式约束让选择变量$x,y$之间存在了关系，因此在这里，我们的一阶条件不能像之前一样进行表述了。我们首先需要构造一个拉格朗日函数$Z$
+	\begin{equation}
+		Z(x,y,\lambda) = f(x,y) + \lambda(c - g(x,y))
+	\end{equation}
+	由此我们就可以构造一个有三个选择变量的自由函数$Z$。通过求解$Z$的稳定值(即对于三个选择变量偏导都为0的值)，我们就可以得到约束条件下的极值。因此在这里，我们的一阶条件就变为了
+	\begin{equation}
+		\begin{aligned}
+			&Z_x = f_x - \lambda g_x = 0 \\
+			&Z_y = f_y - \lambda g_y = 0 \\
+			&Z_{\lambda} = c - g(x,y) = 0
+		\end{aligned}
+		\label{condition}
+	\end{equation}
+	\subsubsection{乘数的经济学含义}
+	当然，为了加深理解，我们不能仅局限于使用这个方法。在拉格朗日乘数法中，我们还可以对于乘数$\lambda$进行分析。$\lambda$在这里也存在着经济学的解释。
+	
+	在这里我们考虑的问题是当约束条件中的$c$变动时，我们的最优值是如何变动的。我们可以将最优值$Z^*$看作是$x^*,y^*,\lambda^*,c$的函数。因为有
+	\begin{equation}
+		Z^* = f(x^*,y^*) + \lambda^*(c - g(x^*,y^*))
+	\end{equation}
+	然而根据(\ref{condition})中的三个式子，我们可以将他们表示为$F^{j}(\lambda,x,y;c) = 0(j = 1,2,3)$的形式，这样我们就可以使用隐函数定理来判断，上述三个式子是否隐性定义了自变量为$c$的隐函数。
+	
+	首先我们需要使用隐函数定理来进行判断，根据上述三个式子，我们写出雅可比行列式
+	\begin{equation}
+		|J|
+		=
+		\begin{vmatrix}
+			\frac{\partial F^1}{\partial \lambda} & \frac{\partial F^1}{\partial x} & \frac{\partial F^1}{\partial y} \\
+			\frac{\partial F^2}{\partial \lambda} & \frac{\partial F^2}{\partial x} & \frac{\partial F^2}{\partial y} \\
+			\frac{\partial F^3}{\partial \lambda} & \frac{\partial F^3}{\partial x} & \frac{\partial F^3}{\partial y} \\
+		\end{vmatrix}
+		=
+		\begin{vmatrix}
+			0 & -g_x & -g_y \\
+			-g_x  & f_{xx} - \lambda g_{xx} & f_{xy} - \lambda g_{xy} \\
+			-g_y  & f_{yx} - \lambda g_{yx} & f_{yy} - \lambda g_{yy}
+		\end{vmatrix}
+	\end{equation}
+	很显然，上述的雅可比行列式不为0，因此我们可以将$\lambda^*,x^*,y^*$表示成$c$的隐函数
+	\begin{equation}
+		\lambda^* = \lambda^*(c), x^* = x^*(c), y^* = y^*(c)
+	\end{equation}
+	因此，现在我们可以将$Z^*$视为是$c$的函数，然后我们可以进行求导。
+	\begin{equation}
+		\begin{aligned}
+			\frac{dZ^*}{dc} &= f_x \frac{dx^*}{dc} + f_y \frac{dy^*}{dc} + [c - g(x^*,y^*)]\frac{d\lambda^*}{dc} + \lambda^*(1 - g_x\frac{dx^*}{dc} - g_y\frac{dy^*}{dc}) \\
+			&=(f_x - \lambda^* g_x)\frac{dx^*}{dc} + (f_y - \lambda^* g_y)\frac{dy^*}{dc} + [c - g(x^*,y^*)]\frac{d\lambda^*}{dc} + \lambda^*
+		\end{aligned}
+	\end{equation}
+	由于一阶条件会使得前面三项的系数都为0，因此我们就得到了$\frac{dZ^*}{dc} = \lambda^*$。也就是说，我们最优化的一阶条件中求出的拉格朗日乘数$\lambda^*$衡量了约束条件中参数$c$的变动对于最优值的影响。
+	
+	\subsection{二阶条件}
+	上面我们介绍了拉格朗日乘数法，但就如我们之前提到的，这里得到的结论只是关于有约束情况下最优化问题的一阶条件。我们还需要对于二阶条件进行考察。
+	
+	但是由于我们研究的对象中，$x,y$之前存在着约束关系，而$\lambda$却不存在着约束关系，因此我们并不能直接简单地套用无约束情况下的条件。但是我们还是可以基于二阶微分的条件进行推导，只不过在这里，$dx$可以是任意的取值，但$dy$是依赖于$x,y,dx$的值(因为$x,y$之间存在着约束)，即$dy = -(g_x/g_y)dx$。
+	
+	我们可以在这种情况下对于二阶微分进行考察
+	\begin{equation}
+		\begin{aligned}
+			d^2z &= d(dz) = \frac{\partial(dz)}{\partial x}dx + \frac{\partial(dz)}{\partial y}dy \\
+			&= \frac{\partial(f_xdx + f_ydy)}{\partial x}dx + \frac{\partial(f_xdx + f_ydy)}{\partial y}dy \\
+			&= [f_{xx}dx + (f_{xy}dy + f_y\frac{\partial dy}{\partial x})]dx + [f_{yx}dx + (f_{yy}dy + f_y\frac{\partial dy}{\partial y})]dy \\
+			&= f_{xx}dx^2 + f_{xy}dydx + f_y\frac{\partial dy}{\partial x}dx + f_{yx}dxdy + f_{yy}dy^2 + f_y\frac{\partial dy}{\partial y}dy
+		\end{aligned}
+	\end{equation}
+	其中第三项和第六项可以合并，形成$f_yd^2y$，因此上式可以表示为
+	\begin{equation}
+		d^2z = f_{xx}dx^2 + f_{yy}dy^2 + 2f_{xy}dxdy + f_yd^2y
+	\end{equation}
+	不同于之前的内容，这里的式子并不是一个二次型，因为$f_yd^2y$并不是一个二次的式子，但是我们可以根据约束$g(x,y)=c$进行变换。由于$dg = 0,d^2g = 0$我们可以知道
+	\begin{equation}
+		d^2g = g_{xx}dx^2 + 2g_{xy}dxdy + g_{yy}dy^2 + g_yd^2y = 0
+	\end{equation}
+	因此我们可以将上述的二阶微分转换成如下形式
+	\begin{equation}
+		d^2z = (f_{xx} - \frac{f_y}{g_y}g_{xx})dx^2 + (f_{xy} - \frac{f_y}{g_y}g_{xy})dxdy + (f_{yy} - \frac{f_y}{g_y}g_{yy})dy^2
+		\label{second-order differentiation}
+	\end{equation}
+	由于$\frac{f_x}{g_x} = \lambda,\frac{f_y}{g_y} = \lambda$我们可以进行简化，导数的表达形式
+	\begin{equation}
+		\begin{aligned}
+			&Z_{xx} = f_{xx} - \lambda g_{xx}\\
+			&Z_{xy} = f_{xy} - \lambda g_{xy} = Z_{yx}\\
+			&Z_{yy} = f_{yy} - \lambda g_{yy}\\
+		\end{aligned}
+	\end{equation}
+	
+	上述就是一个二次型，由此我们完成了对于二阶微分的二次型表达。但是我们需要注意的一点是，再这里的二阶条件判断中，我们并不是随意地选择$dx,dy$，而是选择满足了约束的$dx,dy$，并判断在$dx,dy$的可行集中二次微分$d^2z$，并根据二阶微分来进行二阶条件的判定。
+	
+	而我们可以通过引入海塞行列式来判断约束条件下，这个二次型的有定符号，也就是二阶微分的正负符号。
+	
+	
+	
+	\subsubsection{海塞加边行列式}
+	为了引入海塞加边行列式，回忆一下我们之前的二次型问题，不过这次我们需要加上一些约束
+	\begin{equation}
+		q = au^2 + 2huv + bv^2 \quad , \quad s.t. \ \alpha u + \beta v = 0
+	\end{equation}
+	我们可以知道$v = -(\alpha / \beta)u$。因此我们可以将$q$进行变换。
+	\begin{equation}
+		q = au^2 - 2h\frac{\alpha}{\beta}u^2 + b\frac{\alpha^2}{\beta^2}u^2
+		=(\alpha \beta^2 - 2h\alpha \beta + b\alpha^2)\frac{u^2}{\beta^2}
+	\end{equation}
+	因此我们求解后面式子中小括号内的正负，我们就可以判定二次型的正定与负定。而我们可以构建一个对称矩阵来判定该式子的正负。
+	\begin{equation}
+		\begin{vmatrix}
+			0 & \alpha & \beta \\
+			\alpha & a & h \\
+			\beta & h & b \\
+		\end{vmatrix}
+		=
+		-(\alpha \beta^2 - 2h\alpha \beta + b\alpha^2)
+	\end{equation}
+	因此我们可以判断这个行列式的正负，进而判断我们的二次型$q$为正定还是负定。但是我们需要注意的是，\textbf{这个行列式的值大于0，则我们的行列式恒为负，为负定}。反之同理。
+	
+	我们可以将上述的判别标准运用到(\ref{second-order differentiation})中，这样我们就知道$u = dx,v = dy$，且由于$g_xdx+g_ydy = 0$，我们就可以知道$\alpha = g_x,\beta = g_y$。
+	
+	由此我们可以总结
+	当且仅当$
+	\begin{vmatrix}
+		0 & g_x & g_y \\
+		g_x & Z_{xx} & Z_{xy}\\
+		g_y & Z_{yx} & Z_{yy}\\
+	\end{vmatrix} < 0
+	$,$d^2z$在满足$dg = 0$的情况下为\textbf{正定}
+	
+	上述这个行列式就是海塞加边行列式，值得注意的是，这个行列式与我们在进行最优值的比较静态分析中生成的雅可比行列式是同一个行列式。即我们的最优函数对于三个内生变量$\lambda,x,y$进行二阶偏导得到的矩阵。
+	\begin{equation}
+		|J|
+		=
+		\begin{vmatrix}
+			0 & g_x & g_y \\
+			g_x & Z_{xx} & Z_{xy}\\
+			g_y & Z_{yx} & Z_{yy}\\
+		\end{vmatrix}
+		=
+		|\overline{H}|
+	\end{equation}
+	
+	但是为了完成这个分析，我们还需要知道如何判断这个海塞加边行列式的正负。我们以一个约束，$n$个自变量的函数为例。为了表述这个条件，我们关心的是逐次加边行列式，即在给定海塞加边行列式下
+	\begin{equation}
+		|\overline{H}| =
+		\begin{vmatrix}
+			0 & g_1 & g_2 & \cdots & g_n \\
+			g_1 & Z_{11} & Z_{12} & \cdots & Z_{1n} \\
+			g_2 & Z_{21} & Z_{22} & \cdots & Z_{2n} \\
+			\vdots & \vdots & \vdots & \ddots & \vdots &\\
+			g_n & Z_{n1} & Z_{n2} & \cdots & Z_{nn} \\
+		\end{vmatrix}
+	\end{equation}
+	我们的逐次加边行列式为
+	\begin{equation}
+		|\overline{H}_2| = 
+		\begin{vmatrix}
+			0 & g_1 & g_2 \\
+			g_1 & Z_{11} & Z_{12}\\
+			g_2 & Z_{21} & Z_{22}\\
+		\end{vmatrix},
+		|\overline{H}_3| = 
+		\begin{vmatrix}
+			0 & g_1 & g_2 & g_3 \\
+			g_1 & Z_{11} & Z_{12} & Z_{13}\\
+			g_2 & Z_{21} & Z_{22} & Z_{23}\\
+			g_3 & Z_{31} & Z_{32} & Z_{33}\\
+		\end{vmatrix},\cdots
+	\end{equation}
+	
+	那么当所有逐次加边行列式都小于0时(即$|\overline{H}_i| < 0,i = 2,\cdots,n$)，海塞加边行列式小于0，二阶微分正定，为极小值的二阶充分条件。
+	
+	当$(-1)^i|\overline{H}_i| > 0,i = 2,\cdots,n$时，海塞加边行列式大于0，二阶微分负定，为极大值的二阶充分条件。
+	
+	那么当存在多个约束的情况下呢？区别就在于从哪个逐次加边行列时开始判断。当存在一个约束的情况下就从$1+1=2$的加边行列式开始判断，当存在$m$个约束时，那就从$|\overline{H}_{m+1}|$开始判断。
+	
+	\subsubsection{拟凹条件}
+	在之前的无约束最优化问题中，我们通过判断目标函数的凹性和凸性，从而免去了进行二阶条件的检验。同样的，在约束的最优化问题中，我们也可以判断目标函数的\textbf{拟凹性}和\textbf{拟凸性}来免去二阶条件的检验。
+	
+	我们给出拟凹和拟凸的代数定义：对于$f$定义域(凸集)中的两个不同点$u,v$，和$0<\theta<1$，在$f(v) \geqslant f(u)$的情况下，如果$f[\theta u + (1 - \theta) v] \geqslant f(u)$，则$f$为\textbf{拟凹}。如果$f[\theta u + (1 - \theta) v] \leqslant f(v)$，则$f$为\textbf{拟凸}。
+	
+	当然，还有其他的方法进行拟凹性的判断，不过在这里我们介绍一个利用行列式来判断的方法。
+	
+	如果函数$z = f(x_1,\cdots,x_n)$为二阶连续可微。我们可以构造一个加边的行列式$|B|$来判断拟凹性。
+	\begin{equation}
+		|B| = 
+		\begin{vmatrix}
+			0 & f_1 & f_2 & \cdots & f_n \\
+			f_1 & f_{11} & f_{12} & \cdots & f_{1n} \\
+			f_2 & f_{21} & f_{22} & \cdots & f_{2n} \\
+			\vdots & \vdots &\vdots &\ddots &\vdots &\\
+			f_n & f_{n1} & f_{n2} & \cdots & f_{nn} \\
+		\end{vmatrix}
+	\end{equation}
+	我们通过该行列式的逐阶主子式来判断拟凹性
+	\begin{equation}
+		|B_1| =
+		\begin{vmatrix}
+			0 & f_1 \\
+			f_1 & f_{11}
+		\end{vmatrix},
+		|B_2| = 
+		\begin{vmatrix}
+			0 & f_1 & f_2 \\
+			f_1 & f_{11} & f_{12} \\
+			f_2 & f_{21} & f_{22} \\
+		\end{vmatrix},
+		\cdots,
+		|B_n| = |B|
+	\end{equation}
+	那么目标函数的拟凹性可以用如下的条件进行判断，不过这些条件都是在$x_1,\cdots,x_n > 0$的情况下才能实现。
+	
+	当$i$为奇数时$|B_i|<0$;当$i$为偶数时$|B_i|>0$，对于所有的$i = 1,\cdots,n$
+	
+	我们可以比较一下$|B|$与单个约束条件下的$|\overline{H}|$，他们存在着两个区别。1.$|B|$加边中的元素为$f$的一阶导而不是$g$的一阶导。2.$|B|$中其余元素是函数$f$的二阶偏导，而不是拉格朗日函数的二阶偏导。
+	
+	但是，由于我们知道$Z_{ij} = f_{ij},g_j = a_j,f_j = \lambda a_j$。因此通过对加边的元素提取$\lambda$我们就可以得到
+	\begin{equation}
+		|B| = \lambda^2 |\overline{H}|
+	\end{equation}
+	因此我们知道$|B|$和$|\overline{H}|$具有相同的符号。因此在$|B|$满足了拟凹的条件下，则海塞加边行列式$|\overline{H}|$一定满足约束最大化的二阶条件。
+	
+	\subsection{非线性规划与库恩-塔克条件}
+	在前面一部分中，我们设定约束条件为等式，即约束条件总起作用。在这里我们放宽假设，讨论约束为不等式且存在非负约束时我们如何求解最优化问题，这里就引出了我们的\textbf{库恩-塔克条件}(Kuhn-Tucker condition)。
+	
+	\subsubsection{非负约束}
+	我们首先以一个变量的情况下说明这个条件，我们首先考虑非负约束的问题。假设问题如下
+	\begin{equation}
+		\begin{aligned}
+			&Max \ \pi = f(x_1) \\
+			&s.t. \ x_1 \geqslant 0
+		\end{aligned}
+	\end{equation}
+	在这个问题中存在着三种情况。我们可以将三个论述合成为一个论述
+	\begin{equation}
+		f'(x_1) \leqslant 0, \ x_1 \geqslant 0, \ x_1f'(x_1) = 0
+	\end{equation}
+	这个特点说明了$x_1,f'(x_1)$互补松弛。因此我们可以扩展到$n$个变量的情况下，问题为
+	\begin{equation}
+		\begin{aligned}
+			&Max \ \pi = f(x_1,x_2,\cdots,x_n) \\
+			&s.t. \ x_j \geqslant 0 \ (j = 1,2,\cdots,n)
+		\end{aligned}
+	\end{equation}
+	根据上述的结论，我们可以得出这个问题的解
+	\begin{equation}
+		f'(x_j) \leqslant 0, \ x_j \geqslant 0, \ x_jf'(x_j) = 0, \quad (j = 1,2,\cdots,n)
+	\end{equation}
+	
+	\subsubsection{不等式约束}
+	接下来我们引入不等式约束，具体来说我们处理一个三个变量和两个约束条件的问题：
+	\begin{equation}
+		\begin{aligned}
+			&Max \ \pi = f(x_1,x_2,x_3) \\
+			&s.t. \ 
+			\begin{array}{l}
+				g^1(x_1,x_2,x_3) \leqslant r_1 \\
+				g^2(x_1,x_2,x_3) \leqslant r_2 \\
+				x_1,x_2,x_3 \geqslant 0
+			\end{array}
+		\end{aligned}
+	\end{equation}
+	我们可以通过引入两个虚拟变量来将不等式约束转换称等式约束
+	\begin{equation}
+		\begin{aligned}
+			&Max \ \pi = f(x_1,x_2,x_3) \\
+			&s.t. \ 
+			\begin{array}{l}
+				g^1(x_1,x_2,x_3) + s_1 = r_1 \\
+				g^2(x_1,x_2,x_3) + s_2 = r_2 \\
+				x_1,x_2,x_3,s_1,s_2 \geqslant 0
+			\end{array}
+		\end{aligned}
+	\end{equation}
+	由此我们可以构造一个拉格朗日函数
+	\begin{equation}
+		Z' = f(x_1,x_2,x_3) + \lambda_1[r_1 - g^1(x_1,x_2,x_3) - s_1] + \lambda_2[r_2 - g^2(x_1,x_2,x_3) - s_2]
+	\end{equation}
+	根据我们之前介绍的关于非负约束的条件，我们可以知道
+	\begin{equation}
+		\begin{aligned}
+			&\frac{\partial Z'}{\partial x_j} \leqslant 0 \ , \ x_j \geqslant 0 \ , \ x_j\frac{\partial Z'}{\partial x_j} = 0 \quad (j = 1,2,3)\\
+			&\frac{\partial Z'}{\partial s_i} \leqslant 0 \ , \ s_i \geqslant 0 \ , \ s_i\frac{\partial Z'}{\partial s_i} = 0 \quad (i = 1,2)\\
+			&\frac{\partial Z'}{\partial \lambda_i} = 0
+		\end{aligned}
+		\label{three condition}
+	\end{equation}
+	由于$\frac{\partial Z'}{\partial s_i} = -\lambda_i$，因此我们可以将上述第二行的条件表达为
+	\begin{equation}
+		s_i \geqslant 0 \ , \ \lambda_i \geqslant 0 \ , \ s_i\lambda_i = 0
+	\end{equation}
+	根据第三行条件，我们可以得到$s_i = r_i - g^i(x_1,x_2,x_3)$，因此我们可以将这个式子带入上式，从而得到不带虚拟变量的条件
+	\begin{equation}
+		r_i - g^i(x_1,x_2,x_3) \geqslant 0 \ , \ \lambda_i \geqslant 0 \ , \ \lambda_i[r_i - g^i(x_1,x_2,x_3)] = 0
+	\end{equation}
+	这样我们就将(\ref{three condition})中第二第三行转换成了一个条件。我们也可以用最原始的拉格朗日函数来表示。
+	\begin{equation}
+		Z = f(x_1,x_2,x_3) + \lambda_1[r_1 - g^1(x_1,x_2,x_3)] + \lambda_2[r_2 - g^2(x_1,x_2,x_3) ]
+	\end{equation}
+	那么我们的库恩塔克条件就是
+	\begin{equation}
+		\begin{aligned}
+			&\frac{\partial Z'}{\partial x_j} \leqslant 0 \ , \ x_j \geqslant 0 \ , \ x_j\frac{\partial Z'}{\partial x_j} = 0 \quad (j = 1,2,3)\\
+			&\frac{\partial Z'}{\partial \lambda_i} \geqslant 0 \ , \ \lambda_i \geqslant 0 \ , \ \lambda_i\frac{\partial Z'}{\partial \lambda_i} = 0 \quad (i = 1,2)\\
+		\end{aligned}
+	\end{equation}
+	那么对于多个变量和多个约束的情况，我们也可以很简单地进行扩展。
+	
+	但是我们还需要注意的一点是库恩-塔克条件并不是在什么时候都可以使用的。只有当我们最优化问题中的约束满足一定的条件下，我们才能使用库恩-塔克条件。这个一定的条件叫做\textbf{约束规范}。
+	
+	\subsection{极大值函数与包络定理}
+	最后我们来讨论一个在经济学中应用的非常广泛的一个定理：包络定理。为了引入这个定理，我们首先要考虑将最优值带入目标函数后形成的函数。这个函数叫做\textbf{极大值函数}，也叫做\textbf{间接目标函数}。
+	
+	\subsubsection{无约束情况下的包络定理}
+	我们考虑一个最优化问题，其中$x,y$是变量，$\phi$是参数
+	\begin{equation}
+		Max \ U = f(x,y,\phi)
+	\end{equation}
+	那么我们就可以得到一阶条件
+	\begin{equation}
+		f_x(x,y,\phi) = f_y(x,y,\phi) = 0
+	\end{equation}
+	如果二阶条件满足，则上式就隐含了两个隐函数
+	\begin{equation}
+		x^* = x^*(\phi) \quad y^* = y^*(\phi)
+	\end{equation}
+	我们把这个解带入目标函数就得到了极大值函数
+	\begin{equation}
+		V(\phi) = f(x^*(\phi),y^*(\phi),\phi)
+	\end{equation}
+	如果我们将极大值函数对$\phi$求导
+	\begin{equation}
+		\frac{dV}{d\phi} = f_{x}\frac{\partial x^*}{\partial \phi} + f_{y}\frac{\partial y^*}{\partial \phi} + f_{\phi} = f_{\phi}
+	\end{equation}
+	上式表明了，在最优点，只有$\phi$对目标函数的直接效应是相关的。极大值函数对于参数的导数等于目标函数对于参数的导数。根据包络定理，我们可以得出很多结论。
+	
+	\subsubsection{霍特林引理}
+	
+	我们将包络定理运用到利润最大化的问题中，从而推导出\textbf{霍特林引理}。我们利润最大化的目标函数是
+	\begin{equation}
+		\pi = Pf(K,L) - wL - rK
+	\end{equation}
+	根据一阶条件我们可以知道
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial \pi}{\partial K} = Pf_K(K,L) - r = 0 \\
+			\frac{\partial \pi}{\partial L} = Pf_L(K,L) - w = 0 \\
+		\end{aligned}
+	\end{equation}
+	根据上式我们可以求出两个要素的需求函数
+	\begin{equation}
+		\begin{aligned}
+			&K^* = K^*(w,r,P) \\
+			&L^* = L^*(w,r,P) \\
+		\end{aligned}
+	\end{equation}
+	将上式带入我们的利润函数中，我们就得到了间接目标函数。
+	\begin{equation}
+		\pi^*(w,r,P) = Pf(K^*,L^*) - wL^* - rK^*
+	\end{equation}
+	
+	将间接目标函数对于要素价格和商品价格求偏导进行比较静态分析，我们就可以得到霍特林引理。
+	
+	这说明了，在利润最大化点，无论要素投入是否随着要素价格而变化，工资率变化使得利润产生的变化是一样的。而利润最大化函数对$w$求导得到的结果就是要素需求函数$L^*$的反函数。
+	\begin{equation}
+		\begin{aligned}
+			&\frac{\partial \pi^*(w,r,P)}{\partial w} = -L^*(w,r,P) \\
+			&\frac{\partial \pi^*(w,r,P)}{\partial r} = -K^*(w,r,P) \\
+			&\frac{\partial \pi^*(w,r,P)}{\partial P} = f(K^*,L^*) \\
+		\end{aligned}
+	\end{equation}
+	
+	\subsubsection{约束情况下的包络定理}
+	我们考虑一个约束情况下的最优化问题
+	\begin{equation}
+		\begin{aligned}
+			&Max \ U = f(x,y,\phi) \\
+			&s.t. \ g(x,y,\phi) = 0
+		\end{aligned}
+	\end{equation}
+	这个拉格朗日函数为
+	\begin{equation}
+		Z = f(x,y,\phi) + \lambda[0 - g(x,y,\phi)]
+	\end{equation}
+	一阶条件为
+	\begin{equation}
+		\begin{aligned}
+			&Z_x = f_x - \lambda g_x = 0 \\
+			&Z_y = f_y - \lambda g_y = 0 \\
+			&Z_{\lambda} = -g(x,y,\phi) = 0
+		\end{aligned}
+	\end{equation}
+	求解上述方程我们就可以得到
+	\begin{equation}
+		x = x^*(\phi) \ , \ y = y^*(\phi) \ , \ \lambda = \lambda^*(\phi)
+	\end{equation}
+	带入后我们就可以得到极大值函数
+	\begin{equation}
+		V(\phi) = f[x^*(\phi),y^*(\phi),\phi]
+	\end{equation}
+	现在我们想知道的就是当$\phi$变动时，如何影响$V$
+	\begin{equation}
+		\frac{dV}{d\phi} = f_x\frac{\partial x^*}{\partial \phi} + f_y\frac{\partial y^*}{\partial \phi} + f_{\phi}
+		\label{maximn function}
+	\end{equation}
+	根据约束我们也可以得到
+	\begin{equation}
+		g_x\frac{\partial x^*}{\partial \phi} + g_y\frac{\partial y^*}{\partial \phi} + g_{\phi} = 0
+		\label{constrain}
+	\end{equation}
+	我们将(\ref{constrain})乘$-\lambda$并加入(\ref{maximn function})后可以得到
+	\begin{equation}
+		\frac{dV}{d\phi} = (f_x - \lambda g_x)\frac{\partial x^*}{\partial \phi} + (f_y - \lambda g_y)\frac{\partial y^*}{\partial \phi} + f_{\phi} - \lambda g_{\phi} = Z_{\phi}
+	\end{equation}
+	由此我们可以知道约束情况下的包络定理
+	\begin{equation}
+		\frac{dV}{d\phi} = Z_{\phi}
+	\end{equation}
+	
+	\subsubsection{罗伊恒等式}
+	运用这个约束情况下的包络定理，我们可以得到罗伊恒等式和谢泼德引理，但是我们首先要考虑的是一组对偶问题，即消费者的效用最大化问题与支出最小化问题。
+	
+	首先考虑消费者效用最大化的问题
+	\begin{equation}
+		\begin{aligned}
+			&Max \ U = U(x,y) \\
+			&s.t. \ P_xx + P_yy = B
+		\end{aligned}
+	\end{equation}
+	构建拉格朗日函数
+	\begin{equation}
+		Z = U(x,y) + \lambda(B - P_xx - P_yy)
+	\end{equation}
+	得到一阶条件
+	\begin{equation}
+		\begin{aligned}
+			&Z_x = U_x - \lambda P_x = 0 \\
+			&Z_y = U_y - \lambda P_y = 0 \\
+			&Z_{\lambda} = B - P_xx - P_yy = 0 \\
+		\end{aligned}
+	\end{equation}
+	根据一阶条件我们可以求出消费者的马歇尔需求函数$x^m,y^m$
+	\begin{equation}
+		\begin{aligned}
+			&x^m = x^m(P_x,P_y,B) \\
+			&y^m = y^m(P_x,P_y,B) \\
+			&\lambda^m = \lambda^m(P_x,P_y,B) \\
+		\end{aligned}
+	\end{equation}
+	将需求函数带入后，我们就可以得到间接效用函数
+	\begin{equation}
+		U^* = U^*(x^m(P_x,P_y,B),y^m(P_x,P_y,B)) \equiv V(P_x,P_y,B)
+	\end{equation}
+	
+	在这个效用最大化问题中，我们有着罗伊恒等式。罗伊恒等式表明个体消费者的需求函数等于极大值函数的两个偏导数的比例。
+	
+	证明：我们将$x^m,y^m,\lambda^m$带入间接效用函数后，我们可以得到
+	\begin{equation}
+		V(P_x,P_y,B) = U(x^m,y^m) + \lambda^m(B - P_xx^m - P_yy^m)
+	\end{equation}
+	我们可以求出两个极大值函数的偏导数，首先是间接效用函数对于价格的偏导数
+	\begin{equation}
+		\frac{\partial V}{\partial P_x} = 
+		(U_x - \lambda^mP_x)\frac{\partial x^m}{\partial P_x} + (U_y - \lambda^mP_y)\frac{\partial y^m}{\partial P_x} + (B - P_xx^m - P_yy^m)\frac{\partial \lambda^m}{\partial P_x} - \lambda^mx^m = - \lambda^mx^m
+	\end{equation}
+	我们还可以求出间接效用函数对$B$的偏导
+	\begin{equation}
+		\frac{\partial V}{\partial B} = 
+		(U_x - \lambda^mP_x)\frac{\partial x^m}{\partial B} + (U_y - \lambda^mP_y)\frac{\partial y^m}{\partial B} + (B - P_xx^m - P_yy^m)\frac{\partial \lambda^m}{\partial B} + \lambda^m =  \lambda^m
+	\end{equation}
+	将这两个偏导数相除，我们就可以得到罗伊恒等式
+	\begin{equation}
+		\frac{\partial V/\partial P_x}{\partial V/\partial B} = -x^m
+	\end{equation}
+	
+	\subsubsection{谢泼德引理}
+	为了考虑谢泼德引理，我们需要引入一个支出最小化的问题。
+	\begin{equation}
+		\begin{aligned}
+			Min \ E = P_xx + P_yy \\
+			s.t. \ U(x,y) = U^*
+		\end{aligned}
+	\end{equation}	
+	拉格朗日函数为
+	\begin{equation}
+		Z^d = P_xx + P_yy + \mu[U^* - U(x,y)]
+	\end{equation}
+	一阶条件为
+	\begin{equation}
+		\begin{aligned}
+			&Z^d_x = P_x - \mu U_x = 0 \\
+			&Z^d_y = P_y - \mu U_y = 0 \\
+			&Z^d_{\lambda} = U^* - U(x,y) = 0
+		\end{aligned}
+	\end{equation}
+	求解一阶条件，我们就可以得到
+	\begin{equation}
+		\begin{aligned}
+			x^h = x^h(P_x,P_y,U^*) \\
+			y^h = y^h(P_x,P_y,U^*) \\
+			\mu^h = \mu^h(P_x,P_y,U^*) \\
+		\end{aligned}
+	\end{equation}
+	上述我们求出的就是补偿需求函数，也叫希克斯需求函数。将这个解带入拉格朗日函数我们就可以求出支出函数
+	\begin{equation}
+		E(P_x,P_y,U^*) = P_xx^h + P_yy^h + \mu^h[U^* - U(x^h,y^h)]
+	\end{equation}
+	将这个支出函数对于$P_x,P_y$分别求偏导，我们就可以得到消费者的希克斯需求
+	\begin{equation}
+		\frac{\partial E}{\partial P_x} = 
+		(P_x - \mu^hU_x)\frac{\partial x^h}{\partial P_x} + (P_y - \mu^hU_y)\frac{\partial y^h}{\partial P_x} + [U^* - U(x^h,y^h)]\frac{\partial \mu^h}{\partial P_x} + x^h = x^h
+	\end{equation}
+	\begin{equation}
+		\frac{\partial E}{\partial P_y} = 
+		(P_x - \mu^hU_x)\frac{\partial x^h}{\partial P_y} + (P_y - \mu^hU_y)\frac{\partial y^h}{\partial P_y} + [U^* - U(x^h,y^h)]\frac{\partial \mu^h}{\partial P_y} + y^h = y^h
+	\end{equation}
+	而将$E$对于$U^*$求导，我们就可以得到拉格朗日乘数$\mu^h$
+	\begin{equation}
+		\frac{\partial E}{\partial U^*} = 
+		(P_x - \mu^hU_x)\frac{\partial x^h}{\partial U^*} + (P_y - \mu^hU_y)\frac{\partial y^h}{\partial U^*} + [U^* - U(x^h,y^h)]\frac{\partial \mu^h}{\partial U^*} + \mu^h = \mu^h
+	\end{equation}
+	以上就是谢泼德引理
+	
+	\subsection{总结}
+	本章我们主要关注的问题就是如何求解约束条件下的最优化问题。常用的求解方法就是\textbf{拉格朗日乘数法}，我们主要关注了这个最优化问题中的二阶条件。
+	
+	第三部分我们放松约束的条件，使得我们的约束可以是不等式，且存在非负约束。基于这个非线性规划的问题，我们从最基础构建了\textbf{库恩-塔克条件}。
+	
+	最后我们讨论了最优化问题中的极大值函数以及与其相关的包络定理。我们分别考虑了两种情况下的包络定理，并介绍了与其相关的一些经济学例子。
+	
+	\newpage
+	
+	\section{动态学简介}
+	在动态学中，本指南主要包含了两部分内容。第一部分主要涉及了在已知变量运动模式的情况下如何求解变量随时间变化的路径。具体来说就是如何求解微分方程与差分方程。第二部分主要涉及最优化问题在动态上的拓展。具体来说就是介绍如何使用变分法与最优控制理论来求解动态最优化问题。接下来我们针对这两部分进行简单的介绍。
+	
+	\subsection{微分与差分方程}
+	
+	在第一部分中，我们的主要目标就是在给定一些变量的变化模式下，求解怎么样的时间路径可以满足以上的变化模式。我们以哈罗德－多马经济增长模型(Harrod-Domar model)为例。
+	
+	在这里我们考虑的是投资流量$I(t)$的时间路径。投资流量的变化会产生两方面的影响，投资增加会增加经济体的\textbf{生产能力}，也会对于\textbf{总需求}产生影响。具体来说，这两方面的特征如下所示。
+	
+	\begin{enumerate}
+		\item 总需求方面，$I(t)$增加会直接以乘数的方式增加年收入的流量$Y(t)$，进而影响需求。乘数为$k = 1/s$，$s$为边际储蓄倾向。因此我们有
+		
+		\begin{equation}
+			\frac{dY}{dt} = \frac{dI}{dt} \frac{1}{s}
+		\end{equation}
+		
+		\item 生产能力方面，投资可以增加经济体的潜在产出能力$\kappa$。且假设潜在生产能力与资本存量的比率不变
+		\begin{equation}
+			\frac{\kappa}{K} = \rho
+		\end{equation}
+		
+		那么我们就有
+		\begin{equation}
+			\frac{d \kappa}{d t} = \rho \frac{d K}{d t} = \rho I
+		\end{equation}
+	\end{enumerate}
+	
+	在这里，我们定义均衡为实际产出等于潜在产出，即
+	\begin{equation}
+		\frac{d Y}{d t} = \frac{d \kappa}{d t}
+	\end{equation}
+
+	那么我们关心的问题就是什么样的$I(t)$才能满足上述的这些均衡条件呢？
+	
+	根据上述式子我们可以很容易地写出一个微分方程
+	\begin{equation}
+		\frac{dI}{dt} \frac{1}{s} = \rho I
+	\end{equation}
+	这个微分方程就规定了我们所关心的$I(t)$
+	
+	求解这个方程很简单，我们只需要将方程变换一下形式
+	\begin{equation}
+		\frac{dI}{dt} \frac{1}{I} = \rho s
+	\end{equation}
+	然后左右同时对$t$进行积分我们就可以得到
+	\begin{equation}
+		ln|I| = \rho s t + c
+	\end{equation}
+	在假设投资为正的情况下，我们就得到了，使得生产和需求达到均衡而需要的$I(t)$的增长路径
+	\begin{equation}
+		I(t) = Ae^{\rho s t}
+	\end{equation}
+	如果我们知道投资流量的边界条件，那么我们可以更加具体的求出$I(t)$的路径。
+	
+	由于上述求出的路径是在均衡条件情况下得到的。因此我们可以知道，为了使经济达到均衡，我们的投资必须以上述的形式进行增加。
+	
+	上述是一个最简单的微分方程，由于微分方程的种类繁多，且没有一个通用的方法对于所有的微分方程都适用。因此这一部分的内容主要给出某些特定种类的微分方程的解析解。大体上可以看作是对于微积分内容的一个复习，同时也是后续学习变分法与最优控制理论的一个前置知识。
+
+	
+	
+	\subsection{动态最优化简介}
+	
+	
+	\newpage
+	
+	\section{一阶微分方程}
+	
+	本章我们首先考虑一阶微分方程。这里的一阶指的是方程中出现的最高阶的微分或导数只有一阶。
+	
+	我们首先考虑一个最简单的\textbf{一阶线性微分方程}，他的一般形式如下
+	\begin{equation}
+		\frac{dy}{dt}  + u(t) y = w(t)
+	\end{equation}
+	其中$u(t),w(t)$都是关于$t$的函数，且两者都可以是常数，当两者都是常数时，这个方程就化简成为了具有\textbf{常数系数和常数项}的一阶线性微分方程
+	
+	\subsection{常数系数和常数项}
+	
+	\paragraph{齐次方程}
+	在这里我们还可以继续细分，如果常数项为0，那么这个微分方程就被称作齐次方程，可以写作
+	\begin{equation}
+		\frac{dy}{dt} + ay = 0
+	\end{equation}
+	对于这个方程，通过简单的积分我们就可以求出通解为
+	\begin{equation}
+		y(t) = Ae^{-at}
+	\end{equation}
+	其中$A$为任意常数，在给定限定条件的情况下(例如$y(0)的值$)，我们就可以求出微分方程的定解。
+	
+	\paragraph{非齐次方程}
+	当常数项为非零常数时，我们就得到了非齐次方程
+	\begin{equation}
+		\frac{dy}{dt} + ay = b
+	\end{equation}
+	这时候，方程的解由\textbf{余函数}$y_c$与\textbf{特别积分}$y_p$组成。这两部分都有着重要的经济学意义。但是我们首先先给出方程的解法。
+	
+	我们首先考虑方程的齐次形式，我们称之为\textbf{简化方程}。我们将原始的非齐次方程称为\textbf{完备方程}。我们的余函数$y_c$就是\textbf{简化方程的通解}，而特别积分$y_p$则是\textbf{完备方程的任意特解}。
+	
+	因此我们很容易得到这里的余函数，就是我们之前考虑的齐次方程的通解。接下来就是考虑特别积分，由于特别积分是完备方程的任意特解，因此我们可以通过不断的尝试来计算特解。首先最简单的尝试就是设我们的特解为常数，在上述方程中，我们很容易就得到一个特解。
+	\begin{equation}
+		y_p= \frac{b}{a},(a \neq 0)
+	\end{equation}
+	
+	当然如果常数无法满足方程，那么我们也可以尝试其他形式的特解，例如$y=kt$。
+	
+	求出余函数与特别积分后，我们完备函数的通解就是
+	\begin{equation}
+		y(t) = y_c + y_p = Ae^{-at} + \frac{b}{a}
+	\end{equation}
+
+	同样的，在给定的限定条件下，我们也可以求出任意的常数$A$。
+	
+	\subsection{可变系数和可变项}
+	接下来我们更一般化我们的分析，来考虑可变系数和可变项的一阶线性微分方程。同样的，我们也会分为齐次方程和非齐次方程进行讨论。
+	
+	\paragraph{齐次方程}
+	齐次方程的一般形式为
+	\begin{equation}
+		\frac{dy}{dt} + u(t)y = 0
+	\end{equation}
+	我们也可以改写为
+	\begin{equation}
+		\frac{1}{y} \frac{dy}{dt} = -u(t)
+	\end{equation}
+	将两边对于$t$求积分，很容易就可以得到通解
+	\begin{equation}
+		y(t) = Ae^{-\int u(t)dt}
+	\end{equation}
+	
+	\paragraph{非齐次方程}
+	对于非齐次方程，我们首先直接给出通解，在下一节再给出详细的求解过程
+	\begin{equation}
+		y(t) = e^{-\int u(t)dt}(A + \int we^{\int udt}dt)
+	\end{equation}
+
+	我们可以看到，这里的通解也是由两项组成的。其中一项就是齐次方程的通解，也就是余函数
+	
+	\subsection{恰当微分方程}
+	一般而言，当一个微分方程
+	\begin{equation}
+		Mdy + Ndt = 0
+	\end{equation}
+	当且仅当存在一个函数$F(y,t)$使得$M = \partial F/\partial y,N = \partial F/\partial t$时，这个微分方程就是恰当的，也叫\textbf{恰当微分方程}。
+	
+	根据杨氏定理我们还可以知道，当满足
+	\begin{equation}
+		\frac{\partial M}{\partial t} = \frac{\partial N}{\partial y}
+	\end{equation}
+	微分方程也是恰当的。
+	
+	微分方程可以是线性或非线性的，但是他总是一阶和一次的。
+	
+	由于恰当微分方程只是表明了
+	\begin{equation}
+		dF(y,t) = 0
+	\end{equation}
+	因此他的通解肯定是
+	\begin{equation}
+		F(y,t) = c
+	\end{equation}
+	接下来我们就给出具体的解法
+	
+	首先由于$M = \partial F/\partial y$，因此我们的$F$中一定包含$M$对$y$的积分。我们可以初步写出
+	\begin{equation}
+		F(y,t) = \int Mdy + \psi (t)
+	\end{equation}
+	又由于我们有$N = \partial F/\partial t$，因此将上式对$t$求偏导一定等于$N$。由此我们可以求出$F(y,t)$
+	
+	当给定微分方程不是恰当的时候，即
+	\begin{equation}
+		\frac{\partial M}{\partial t} = \frac{\partial N}{\partial y}
+	\end{equation}
+	我们可以通过左右两边同时乘以$\mu$来使得
+	\begin{equation}
+		\frac{\partial \mu M}{\partial t} = \frac{\partial \mu N}{\partial y}
+	\end{equation}
+	这个$\mu$就被称作\textbf{积分因子}。
+	
+	通过积分因子转换为恰当方程的方法，我们可以来求解带有可变系数和可变项的一阶线性微分方程。
+	
+	对于一阶线性微分方程
+	\begin{equation}
+		\frac{dy}{dt} + uy = w
+	\end{equation}
+	我们可以转换为
+	\begin{equation}
+		dy + (uy-w)dt = 0
+	\end{equation}
+	且上述这个微分方程有积分因子
+	\begin{equation}
+		e^{\int udt} \equiv exp(\int udt)
+	\end{equation}
+
+	这样我们就有恰当微分方程
+	\begin{equation}
+		e^{\int udt}dy + e^{\int udt}(uy-w)dt = 0
+	\end{equation}
+	那么我们首先就有
+	\begin{equation}
+		F(y,t) = \int e^{\int udt}dy + \psi(t) = ye^{\int udt} + \psi (t) \label{solution to qiadang}
+	\end{equation}
+	将上式对$t$进行求导我们就可以知道
+	\begin{equation}
+		\frac{\partial F}{\partial t} = yue^{\int udt} + \psi' (t) = N = e^{\int udt}(uy-w)
+	\end{equation}
+	因此我们就可以得到一个微分方程
+	\begin{equation}
+		\psi' (t) = -we^{\int udt}
+	\end{equation}
+	由此就可以知道
+	\begin{equation}
+		\psi (t) = -\int we^{\int udt} dt
+	\end{equation}
+	将上述带入\ref{solution to qiadang}我们就可以得到通解
+	\begin{equation}
+		\int e^{\int udt}dy + \psi(t) = ye^{\int udt} -\int we^{\int udt} dt = c
+	\end{equation}
+	也就是
+	\begin{equation}
+		y(t) = e^{-\int u(t)dt}(A + \int we^{\int udt}dt)
+	\end{equation}
+	
+	
+	
+	
+	\subsection{一阶一次非线性微分方程}
+	对于非线性微分方程，我们主要取其中的几种特例进行分析。
+	\subsubsection{恰当微分方程}
+	对于非线性的微分方程，如果他的形式符合我们之前说的恰当微分方程，那么我们就可以使用之前的解法，这里不再赘述。
+	
+	\subsubsection{可分离变量}
+	如果对于一个微分方程，我们恰好可以分离为如下的形式
+	\begin{equation}
+		f(y) dy + g(t) dt = 0
+	\end{equation}
+	那么就说这个微分方程是可分离变量的。解法也十分简单，只要分离变量后对两个变量分别进行积分就可以得到结果。
+	
+	\subsubsection{伯努利方程}
+	如果微分方程$dy/dt = h(y,t)$恰好可以转换成如下的非线性形式
+	\begin{equation}
+		\frac{dy}{dt} + Ry = Ty^m
+	\end{equation}
+	其中$R,T$为关于$t$的函数，那么我们可以称上述方程为\textbf{伯努利方程}。我们可以将伯努利方程化简为线性的方程并进行求解。
+	
+	首先我们将两边同时除以$y^m$，得
+	\begin{equation}
+		y^{-m}\frac{dy}{dt} + Ry^{1-m} = T
+	\end{equation}
+	我们再令
+	\begin{equation}
+		z \equiv y^{1-m},[\frac{dz}{dt} = \frac{dz}{dy}\frac{dy}{dt} = (1-m)y^{-m}\frac{dy}{dt}]
+	\end{equation}
+	那么我们原有的方程就会转换为
+	\begin{equation}
+		\frac{1}{1-m} \frac{dz}{dt} + Rz = T
+	\end{equation}
+	由此我们就得到了一个关于$z$的一阶线性微分方程，求解该方程后，我们再根据$z$来求解$y$。最后就可以得到初始方程的解。
+	
+	\subsection{均衡}
+	当我们求出路径后，我们就得到了我们所关心的变量随时间变化的方式。那么很自然的一个问题就是，当我们的时间$t \to \infty$时，我们所关心的变量是否收敛于一个特定的值。
+	
+	这时候我们可以回忆一下，我们的微分方程的解是由两部分组成的。特别积分$y_p$和余函数$y_c$。其中特别积分就是相关变量\textbf{跨期均衡的水平}；余函数则代表了\textbf{均衡偏差}。如果我们的特别积分是常数，那么我们就有\textbf{稳定均衡}。如果我们的特别积分不是常数，我们可以将其解释为\textbf{移动均衡}。
+	
+	那么显然存在均衡的一个必要条件就是$\lim\limits_{t \to \infty}y_c \to 0$
+	
+	\subsection{运用相位图进行定性分析}
+	对于非线性的微分方程，我们只有方法求解其中的特定几种类型。但是除了直接求解，我们还可以使用定性的方法来分析解是否有着均衡。这时候我们就要引入相位图这个工具。
+	
+	通常来说，我们都可以把微分方程写成如下的形式
+	\begin{equation}
+		\frac{dy}{dt} = f(y)
+	\end{equation}
+	这样我们就可以将$\frac{dy}{dt}$看作是$y$的函数。通过几何的方式来表示这个函数，那么我们就得到了\textbf{相位图}。表示函数$f$的曲线就是\textbf{相位线}。那么这样的图像其实就包含了$y$的定性信息。
+	
+	定性信息主要来源于以下的两个结论：
+	\begin{enumerate}
+		\item 在横轴上的任意点$dy/dt > 0$，$y$必定随着时间而增加，反映在$y$轴上就是$y$必定由左向右移动。反之同理。
+		
+		\item 如果$y$的均衡水平存在，那么一定存在于横轴中，且相位线横轴的交点会指向均衡点。
+	\end{enumerate}
+
+	我们在下一个例子中具体的看如何用相位图进行分析。
+	
+	\subsection{以索洛增长模型为例进行分析}
+	在这里，我们用简化的索洛增长模型来对于经济的增长进行分析。不同于多马模型中资本与劳动总是以\textbf{固定比例}组合。索洛增长模型分析了资本与劳动可以按照\textbf{可变比例}进行组合的情况。首先我们有着生产函数
+	\begin{equation}
+		Q = f(K,L)
+	\end{equation}
+	其中$Q$为产出，$K,L$为资本与劳动。且边际产量递增$f_K,f_L > 0 $；边际收益递减$f_{KK} < 0,f_{LL} < 0$。我们假设生产函数为线性齐次函数，即规模报酬不变。那么我们就有
+	\begin{equation}
+		Q = Lf(\frac{K}{L},1) = L\phi(k),k = \frac{K}{L} \label{solow one}
+	\end{equation}
+	对于这个新构造的函数，我们也可以知道$\phi'(k) > 0,\phi''(k) < 0$。
+	
+	索洛模型包含了以下两个重要的假设
+	\begin{enumerate}
+		\item 产出$Q$以固定比例$s$用于投资
+		\begin{equation}
+			\dot{K} = sQ \label{solow two}
+		\end{equation}
+	
+		\item 劳动力呈指数增长，增长率为$\lambda$
+		\begin{equation}
+			\frac{\dot{L}}{L} = \lambda \label{solow three}
+		\end{equation}
+	\end{enumerate}
+
+	为了求解这个模型，我们的目标是将\ref{solow one},\ref{solow two},\ref{solow three}转换成一个微分方程。首先结合\ref{solow one},\ref{solow two}我们可以得到
+	\begin{equation}
+		\dot{K} = sL\phi(k)
+	\end{equation}
+	然后根据$\dot{K}$的定义我们可以知道
+	\begin{equation}
+		\begin{aligned}
+			\dot{K} = L\dot{k} + k\dot{L} = L\dot{k} + k\lambda L 
+		\end{aligned}
+	\end{equation}
+	结合上面两式我们就可以知道
+	\begin{equation}
+		\dot{k} =s\phi(k) -  \lambda k
+	\end{equation}
+	
+	由于上述的方程并未给出明确的函数形式，因此我们也无法求解出满足条件的$k$的具体形式。但是我们可以用相位图进行定性的分析，来判断$k$是否存在着稳定的均衡。
+	
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[scale=0.5]{"solow.png"}
+	\end{figure}
+
+	如上图所示，我们可以看到资本量$k$存在着一个均衡点。以上就是对于索洛模型的一个定性分析，实际上我们可以确定模型中的函数形式，从而进行定量分析。
+	
+	我们设生产函数为
+	\begin{equation}
+		Q = K^{\alpha}L^{1 - \alpha} = Lk^{\alpha}
+	\end{equation}
+	那么我们的$\phi(k) = k^{\alpha}$。因此我们模型的微分方程就变为了
+	\begin{equation}
+		\dot{k} =sk^{\alpha} -  \lambda k
+	\end{equation}
+	以上使一个伯努利方程，因此我们可以得到通解
+	\begin{equation}
+		k^{1-\alpha} = [k(0)^{1-\alpha} - \frac{s}{\lambda}]e^{-(1 - \alpha)\lambda t} + \frac{s}{\lambda}
+	\end{equation}
+	以上的解就确定了$k$的时间路径。从上述结果我们也可以看出$k$的均衡值
+	\begin{equation}
+		\lim\limits_{t \to \infty}k \to (\frac{s}{\lambda})^{1/(1 - \alpha)}
+	\end{equation}
+	即在增长过程中，劳动和资本比例呈一个常数。
+		
+	
+	\newpage
+	
+	\section{高阶微分方程}
+	在这章我们考虑高阶的微分方程，即方程中存在着二阶及以上的导数或微分。同样的，我们还是先考虑最简单的高阶线性微分方程。他们通常有如下的形式
+	\begin{equation}
+		\frac{d^n y}{d t^n} + a_1 \frac{d^{n-1} y}{d t^{n-1}} + \cdots + a_{n-1} \frac{dy}{dt} + a_n y = b
+	\end{equation}
+	
+	本章中，我们所考虑的微分方程系数都是常数，但是$b$不一定是常数项。
+	
+	\subsection{二阶微分方程}
+	我们先从二阶微分方程开始分析。二阶微分方程通常有如下的形式
+	\begin{equation}
+		y''(t) + a_1 y'(t) + a_2 y = b
+	\end{equation}
+	同样的，当$b \neq 0$是，方程就是非齐次方程。而非齐次方程的解由两个部分组成。余函数与特别积分。余函数就是对应的齐次方程的通解。因此在这里我们直接考虑如何求解一个非齐次方程。
+	
+	\subsection{特别积分}
+	首先我们关注于如何求解特别积分。我们考虑常数项和可变项如何求解。
+	
+	如果右边是常数项，那么特别积分的求法和之前一样，由于是特别积分只是一个特解，因此我们就可以用常数、一次函数等进行尝试。
+	
+	如果特别积分是一个可变项，那么我们就根据可变项的内容利用待定系数法进行求解。`
+	
+	\subsection{余函数}
+	齐次我们主要专注于如何求解余函数，在这里我们主要关注有着常数系数的微分方程。求解余函数就是求解下述微分方程的通解
+	\begin{equation}
+		y''(t) + a_1 y'(t) + a_2 y = 0
+	\end{equation}
+	为了求解这个方程，我们首先需要根据微分方程的系数构建一个特征方程。
+	\begin{equation}
+		r^2 + a_1 r + a_2 = 0
+	\end{equation}
+	以上的特征方程的解存在着三种情况
+	\paragraph{不同的实根} 如果$a_1^2 - 4a_2 > 0$，那么特征方程就有两个不同的实根。设两个实根为$r_1,r_2$，那么我们就有通解
+	\begin{equation}
+		y_c = A_1e^{r_1t} + A_2e^{r_2t}
+	\end{equation}
+
+	\paragraph{重实根} 如果$a_1^2 - 4a_2 = 0$，那么我们就会有两个相同的实根。设实根为$r$，我们就有通解
+	\begin{equation}
+		y_c = (A_1 + A_2 t)e^{rt}
+	\end{equation}
+	
+	\paragraph{复根} 如果$a_1^2 - 4a_2 < 0$，那么我们就会有一对共轭复数作为根，即$r_1,r_2 = h \pm vi$。因此我们很容易就知道会有通解
+	\begin{equation}
+		y_c = e^{ht}(A_1e^{vit} + A_2e^{-vit})
+	\end{equation}
+	根据欧拉公式
+	\begin{equation}
+		e^{i\theta} \equiv \cos\theta + i \sin\theta
+	\end{equation}
+	我们可以将上述的解进行转换
+	\begin{equation}
+		\begin{aligned}
+			y_c 
+			&= e^{ht}[A_1( \cos vt + i \sin vt) + A_2(\cos vt - i \sin vt)]  \\
+			&= e^{ht}[(A_1 + A_2)\cos vt +(A_1 - A_2) i \sin vt] \\
+			&= e^{ht}[A_3\cos vt +A_4 i \sin vt]
+		\end{aligned}
+	\end{equation}
+	
+	\subsection{高阶微分方程与罗斯定理}
+	\newpage
+	
+	\section{一阶差分方程}
+	
+	\section{高阶差分方程}
+	
+	\newpage
+	
+	\section{变分法的基本问题与一阶条件}
+	我们首先给出变分法研究的基本问题
+	\begin{equation}
+		\begin{aligned}
+			&\max / \min &&V[y] = \int_{0}^{T}F[t,y(t),y'(t)]dt \\
+			&s.t. &&y(0) = A \\
+			&  &&y(T) = Z \\
+		\end{aligned}
+	\end{equation}
+	变分法的任务就是在一组可行路径(paths)/轨道(trajectories)y中选择能够使$V[y]$产生极值的路径。也就是找出一个极值路径(extremal)。
+	
+	使用变分法存在着几个前提。1.可行路径需要有连续导数2.被积函数是二次可微的。需要注意的是变分法求出的极值路径是相对极值。
+	
+	\subsection{欧拉方程}
+	在这个问题中也存在着一阶条件与二阶条件。我们首先来考察一阶条件，在只有单个状态变量的情况下，变分法得到的一阶条件也叫做\textbf{欧拉方程}。我接下来看如何推导出这个欧拉方程。
+	
+	我们设路径$y^*(t)$是极值路径。那么对于这个路径添加一个任意的扰动，都会使得我们的泛函$V[y]$偏离极值。我们用$p(t)$来表示扰动。且满足
+	\begin{equation}
+		p(0) = p(T) = 0
+	\end{equation}
+	那么我们就知道，任意极值路径旁的其他路径都可以表示为
+	\begin{equation}
+		y(t) = y^*(t) + \varepsilon p(t)
+	\end{equation}
+	$\varepsilon$为任意小的值，且我们知道，上述的所有其他路径$\varepsilon \to 0,y(t) \to y^*(t)$。
+	
+	那么我们可以知道，给定任意一个$\varepsilon$，我们就可以得到一个路径。因此我们可以将泛函转换为一个关于$\varepsilon$的函数$V(\varepsilon)$。那么一阶条件就是
+	\begin{equation}
+		\frac{dV}{d\varepsilon} |_{\varepsilon = 0} = 0
+	\end{equation}
+	根据上述条件我们就可以构建欧拉方程。
+	
+	首先我们展开$V(\varepsilon)$的表达式。
+	\begin{equation}
+		V(\varepsilon) =\int_{0}^{T}F[t,\underbrace{y^*(t) + \varepsilon p(t)}_{y(t)},\underbrace{y^{*'}(t) + \varepsilon p'(t)}_{y'(t)}]dt
+	\end{equation}
+	运用莱布尼茨法则，求导后我们可以得到
+	\begin{equation}
+		\begin{aligned}
+			\frac{dV}{d\varepsilon} &= \int_{0}^{T}\frac{\partial F}{\partial \varepsilon}dt = \int_{0}^{T}(\frac{\partial F}{\partial y}\frac{\partial y}{\partial \varepsilon} + \frac{\partial F}{\partial y'}\frac{\partial y'}{\partial \varepsilon})dt\\ 
+			&=\int_{0}^{T}[F_y p(t) + F_{y'} p'(t)]dt
+		\end{aligned}
+	\end{equation}
+	当$\frac{dV}{d\varepsilon} |_{\varepsilon = 0} = 0$时，我们就有
+	\begin{equation}
+		\int_{0}^{T}F_y p(t)dt + \int_{0}^{T}F_{y'} p'(t)dt = 0
+	\end{equation}
+	但是其中包含着两个任意项$p(t),p'(t)$，且两者之间存在着关系。因此我们还需要进行化简。
+	
+	运用分布积分的法则，上式的第二项积分可以进行如下的转换
+	\begin{equation}
+		\int_{0}^{T}F_{y'} p'(t)dt = [F_{y'}p(t)]^T_0 - \int_{0}^{T}p(t)\frac{dF_{y'}}{dt}dt = \int_{0}^{T}p(t)\frac{dF_{y'}}{dt}dt
+	\end{equation}
+	因此我们可以得到极值路径必要条件的一种表达方法
+	\begin{equation}
+		\int_{0}^{T}p(t)[F_y - \frac{dF_{y'}}{dt}]dt
+	\end{equation}
+	由于$p(t)$是任意的扰动曲线，因此我们可以得到必要条件的另一种表达方式，也就是欧拉方程。
+	\begin{equation}
+		F_y - \frac{dF_{y'}}{dt} = 0,t \in[0,T] \label{eular one}
+	\end{equation}
+	同样的，积分后的形式也是等价的
+	\begin{equation}
+		\int F_y dt = F_{y'}
+	\end{equation}
+	我们还可以将$\frac{dF_{y'}}{dt}$展开
+	\begin{equation}
+		\begin{aligned}
+			\frac{dF_{y'}}{dt} &= \frac{\partial F_{y'}}{\partial t} + \frac{\partial F_{y'}}{\partial y}\frac{dy}{dt} + \frac{\partial F_{y'}}{\partial y'}\frac{dy'}{dt} \\
+			&= F_{ty'} + F_{yy'}y'(t) + F_{y'y'}y''(t)
+		\end{aligned}
+	\end{equation}
+	因此欧拉方程也有如下的形式
+	\begin{equation}
+		F_{y'y'}y''(t) + F_{yy'}y'(t) + F_{ty'} - F_y = 0 \label{eular two}
+	\end{equation}
+	从上述形式看来，欧拉方程一般是一个二阶非线性微分方程。通过求解这个微分方程，我们就可以得到极值路径$y^*(t)$
+	
+	\subsection{几种特殊情况下的欧拉方程与欧拉方程的扩展}
+	以上是一般情况下所构建的欧拉方程，在上述推导过程中，我们始终假设函数$F$的三个自变量都存在。但是当$F$具有比较特殊的形式，从而使得其中的一个或多个自变量没有出现时，我们的一阶条件可以得到简化。
+	
+	\subsubsection{$F = F(t,y')$}
+	由于$F$中不含有$y$。因此我们可以将$\ref{eular one}$化简为
+	\begin{equation}
+		F_{y'} = constant
+	\end{equation}
+	
+	\subsubsection{$F = F(y,y')$}
+	由于$F$中不含有$t$。因此我们可以知道$F_{ty'} = 0$，从而可以化简$\ref{eular two}$，得到
+	\begin{equation}
+		F_{y'y'}y''(t) + F_{yy'}y'(t) - F_y = 0
+	\end{equation}
+	将上式两边同时乘以$y'$后得到
+	\begin{equation}
+		\begin{aligned}
+			&F_{y'y'}y''(t)y'(t) + F_{yy'}y'(t)y'(t) - F_yy'(t) \\
+			= &F_{y'}y'' + y'(F_{yy'}y' + F_{y'y'}y'') - (F_yy' + F_{y'}y'') \\
+			= &\frac{d}{dt}(y'F_{y'}) - \frac{d}{dt}F(y,y') \\
+			=& \frac{d}{dt}(y'F_{y'}-F)
+		\end{aligned} 
+	\end{equation}
+	
+	
+	\subsubsection{$F = F(y')$}
+	同样的，我们可以对$\ref{eular two}$进行化简，很容易就得到
+	\begin{equation}
+		F_{y'y'}y''(t) = 0
+	\end{equation}
+	很容易就得出，我们的通解是一个由两个参数的直线族。
+	
+	\subsubsection{$F = F(t,y)$}
+	当函数$F$中不含有$y'$时，我们的欧拉方程就不再是一个微分方程了，而是
+	\begin{equation}
+		F_y(t,y) = 0
+	\end{equation}
+
+	\subsubsection{存在若干状态变量}
+	当给定问题中存在若干的状态变量时，我们的泛函就变为
+	\begin{equation}
+		V[y_1,\cdots,y_n] = \int_{0}^{T}F(t,y_1,\cdots,y_n,y_1',\cdots,y_n')dt
+	\end{equation}
+	那么极值路径一定满足以下一系列的欧拉方程组
+	\begin{equation}
+		F_{y_j} - \frac{d}{dt}F_{y_j'} = 0,t\in[0,T],(j = 1,\cdots,n)
+	\end{equation}
+	
+	\subsubsection{存在高阶导数}
+	当存在高阶导数时，我们可以通过引入新的变量来将问题转换成有若干变量的情况。我们也可以直接使用\textbf{欧拉-泊松方程}。对于一个有着高阶导数的问题
+	\begin{equation}
+		V[y] = \int_{0}^{T}F(t,y,y',\cdots,y^{(n)})dt
+	\end{equation}
+	欧拉-泊松方程为
+	\begin{equation}
+		F_y - \frac{d}{dt}F_{y'} + \frac{d^2}{dt^2}F_{y''} - \cdots + (-1)^n \frac{d^n}{dt^n}F_{y^{(n)}} = 0 
+	\end{equation}
+	接下来我们用一个例子来考察欧拉方程的经济学应用
+	
+	\subsection{例子：垄断企业的动态优化}
+	在这里我们考虑一个垄断企业如何动态设置价格的问题。也就是古典的埃文斯(Evans)模型。在这里企业选择的变量为$P(t)$。
+	
+	假设企业只生产一种商品，且成本函数为
+	\begin{equation}
+		C = \alpha Q^2 + \beta Q + \gamma 
+	\end{equation}
+	我们假设产量取决与价格与价格的变化率
+	\begin{equation}
+		Q = a - b P(t) + h P'(t)
+	\end{equation}
+	则企业的利润函数为
+	\begin{equation}
+		\begin{aligned}
+			\pi(P,P') &= PQ - C \\
+			&=P(a - b P(t) + h P'(t)) - \alpha(a - b P(t) + h P'(t))^2 - \beta(a - b P(t) + h P'(t)) - \gamma \\
+		\end{aligned}
+	\end{equation}
+	展开后我们就可以得到
+	\begin{equation}
+		\begin{aligned}
+			\pi(P,P') = & -b(1 + \alpha b)P^2 + (a + 2\alpha ab + \beta b)P \\
+			&-\alpha h^2 P^{'2} - h(2\alpha a + \beta)P' + h(1 + 2\alpha b)PP' \\
+			&-(\alpha a^2 + \beta a + \gamma)
+		\end{aligned}
+	\end{equation}
+
+	\section{可变端点下的问题}
+
+	\subsection{可变端点下的一般横截条件}
+	在我们最初解决的问题中，我们设定了两个边界条件，即目标函数$y$的初始点与终止点。基于这两个条件，我们可以求解微分方程通解中的变量。
+	
+	当我们没有设定其中的初始点或者终止点时，我们就需要其他的条件来求解通解中的变量。这个条件就是\textbf{横截条件}。本节中我们会推导出横截条件。
+	
+	现在我们的问题如下
+	\begin{equation}
+		\begin{aligned}
+			&\max / \min &&V[y] = \int_{0}^{T}F[t,y(t),y'(t)]dt \\
+			&s.t. &&y(0) = A \\
+			&  &&y(T) = y_T(T,y_T\text{自由}) \\
+		\end{aligned}
+	\end{equation}
+	那么在这个问题中，我们不仅是在选择$y(t)$。我们还在选择合适的终止时间$T$和终止状态$y_T$来寻找极值路径。
+	
+	那么同样的，我们还是使用之前的思路。我们首先假设存在最优的终止时间$T^*$。那么相邻的任意$T$可以表示为
+	\begin{equation}
+		T = T^* + \varepsilon \Delta T
+	\end{equation}
+	由于$\Delta T$是任意给定的。因此我们可以将$T$看作是$\varepsilon$的函数。且
+	\begin{equation}
+		\frac{dT}{d\varepsilon} = \Delta T
+	\end{equation}
+	
+	同样的，使用扰动曲线和上述的$\varepsilon$我们也可以表述相邻路径族
+	\begin{equation}
+		y(t) = y^*(t) + \varepsilon p(t)
+	\end{equation}
+	那么我们就可以将泛函$V[y]$看作是一个函数$V(\varepsilon)$
+	\begin{equation}
+		V(\varepsilon) = \int_{0}^{T(\varepsilon)}F[t,\underbrace{y^*(t) + \varepsilon p(t)}_{y(t)},\underbrace{y^{*'}(t) + \varepsilon p'(t)}_{y'(t)}]dt
+	\end{equation}
+	那么一阶必要条件就是$\frac{dV}{d\varepsilon} = 0$。我们可以知道
+	\begin{equation}
+		\begin{aligned}
+			\frac{dV}{d\varepsilon} &= \int_{0}^{T(\varepsilon)} \frac{\partial F}{\partial \varepsilon}dt + F[T,y(T),y'(T)]\frac{dT}{d\varepsilon} \\
+			&=\int_{0}^{T}p(t)[F_y - \frac{d}{dt}F_{y'}]dt + [F_{y'}]_{t = T}p(T) + [F]_{t = T}\Delta T
+		\end{aligned}
+	\end{equation}
+	那么我们可以得到新的条件
+	\begin{equation}
+		\int_{0}^{T}p(t)[F_y - \frac{d}{dt}F_{y'}]dt + [F_{y'}]_{t = T}p(T) + [F]_{t = T}\Delta T = 0
+	\end{equation}
+	我们可以看到，新的条件中的第一项和之前的欧拉方程相同。因此可以知道，第二项和第三项才是控制终止点的条件。
+
+	但是其中包含着许多的任意项$p(t),p(T),\Delta T$。这些任意项存在本质上是因为我们不仅需要选择$y(t)$(由$p(t)$代表)，我们还需要选择终止时间与终止状态(由$T,\Delta T$代表)。
+	
+	因此我们现在需要寻找这些任意项之间的关系。设最优的曲线终止时间为$T$，且终止状态为$y_T$。我们其他的曲线可以取不同的终止时间，假设我们任取的曲线在终止时间$T$上又多了$\Delta T$。那么这个曲线的值也会发生改变。改变主要由两项组成，一项是扰动曲线$p(T)$，另一项则是$y'(T)\Delta T$。
+	
+	那么我们就有
+	\begin{equation}
+		\Delta y_T = p(T) + y'(T)\Delta T
+	\end{equation}
+	即
+	\begin{equation}
+		p(T) = \Delta y_T - y'(T)\Delta T
+	\end{equation}
+	我们带入新的条件中的二三项就可以得到\textbf{一般横截条件}。
+	\begin{equation}
+		[F-y'F_{y'}]_{t = T}\Delta T + [F_{y'}]_{t = T}\Delta y_T = 0 \label{general transversal condition}
+	\end{equation}
+	
+	\subsection{特殊的横截条件}
+	在上一节中，我们给出了一般的横截条件。这节中我们考虑在某些特定条件下的横截条件。
+	
+	\subsubsection{垂直终止线与截断垂直终止线}
+	在垂直终止线中，我们固定了结束时间点$T$，这样的问题也叫做\textbf{固定时间水平问题}。在这里，我们有$\Delta T = 0$，因此我们就有
+	\begin{equation}
+		[F_{y'}]_{t = T}\Delta y_T = 0 \label{transversal condition one}
+	\end{equation}
+	在这个问题中，$\Delta y_T$可以取任何值，因此一般横截条件就变成了
+	\begin{equation}
+		[F_{y'}]_{t = T} = 0
+	\end{equation}
+
+	有些时候，除了存在垂直终止线，我们对于终止状态也有着限制，即
+	\begin{equation}
+		y_T^{*} \geqslant y_{min}
+	\end{equation}
+	这时候问题就多了一个约束。我们还是可以用我们之前思考不等式约束时候的思路。对于这个约束条件可能存在着两种结果。
+	
+	第一种情况下，约束并没有对问题产生影响，即我们在无约束情况下求出的最优点自动满足了约束，这时候的横截条件就是
+	\begin{equation}
+		[F_{y'}]_{t = T} = 0,y_T^{*} > y_{min}
+	\end{equation}
+	这里的思路和之前的一样。因为在这种情况下，我们的$\Delta y_T$仍然可以在最优值附近任意取值，因此不会产生影响。
+	
+	但是在第二种情况下，我们的约束对结果产生了影响，即$y_T^{*} = y_{min}$。这时候由于存在着终止值的约束$y_T^{*} \geqslant y_min$，我们相邻路径中的$\Delta y_T$不再是任意的了，只能是非负的。这同时意味着我们的$\varepsilon \geqslant 0$。这样就等同于对于$V(\varepsilon)$这个目标函数的最优化添加了约束。
+	
+	那么对于\textbf{最大化}问题，我们的\ref{transversal condition one}就会变成
+	\begin{equation}
+		[F_{y'}]_{t = T}\Delta y_T \leqslant 0
+	\end{equation}
+	由于$\Delta y_T \geqslant 0$，因此上式就意味这
+	\begin{equation}
+		[F_{y'}]_{t = T} \leqslant 0,y_{T}^{*} \geqslant y_{min},(y_{T}^{*} - y_{min})[F_{y'}]_{t = T} = 0
+	\end{equation}
+	
+	如果是\textbf{最小化}问题，那么我们的条件就是
+	\begin{equation}
+		[F_{y'}]_{t = T} \geqslant 0,y_{T}^{*} \geqslant y_{min},(y_{T}^{*} - y_{min})[F_{y'}]_{t = T} = 0
+	\end{equation}
+
+	\subsubsection{水平终止线与截断水平终止线}
+	在水平终止线中，我们固定了结束状态$y_T$，因此这样 问题也叫做固定端点问题。正好和上一个情况相反，在这里我们的$\Delta y_T = 0$，因此我们的横截条件就变成了
+	\begin{equation}
+		[F-y'F_{y'}]_{t = T} = 0 \label{transversal condition two}
+	\end{equation}
+
+	同样的，如果在截断水平终止线的情况下，对于最大化的问题。我们的\ref{transversal condition two}就应该变成
+	\begin{equation}
+		[F-y'F_{y'}]_{t = T}\Delta T \leqslant 0
+	\end{equation}
+	因此如果截断的条件为
+	\begin{equation}
+		T \leqslant T_{max}
+	\end{equation}
+	我们的横截条件就是
+	\begin{equation}
+		[F-y'F_{y'}]_{t = T} \geqslant 0,T^* \leqslant T_{max},(T^* - T_{max})[F-y'F_{y'}]_{t = T} = 0
+	\end{equation}
+	对于最小化的情况，我们就有
+	\begin{equation}
+		[F-y'F_{y'}]_{t = T} \leqslant 0,T^* \leqslant T_{max},(T^* - T_{max})[F-y'F_{y'}]_{t = T} = 0
+	\end{equation}
+
+	\subsubsection{终止曲线}
+	有时候，我们的终止条件是一条关于$t$的曲线$\phi(t)$。由于给定了终止曲线，我们就可以知道$\Delta y_T = \phi ' \Delta T$。因此我们也可以进行化简，从而得到
+	\begin{equation}
+		[F + (\phi ' - y')F_{y'}]_{t = T} = 0
+	\end{equation}
+
+	\subsubsection{可变初始点}
+	可变初始点的情况与可变终止点相同。只不过问题从确定终止时间与终止状态变为了确定初始时间与初始状态。其他的内容都是与终止点情况类似的，因此不再赘述。
+	
+	\subsubsection{多个状态变量}
+	在多个状态变量的情况下，设我们的被积函数为
+	\begin{equation}
+		F(t,y_1,\cdots,y_n,y_1',\cdots,y_n')
+	\end{equation}
+	这时候我们的一般横截条件就变为了
+	\begin{equation}
+		[F - (y'_1F_{y'_1} + \cdots + y'_1F_{y'_1})]_{t = T}\Delta T + [F_{y'_1}]_{t = T}\Delta y_{1T} + \cdots + [F_{y'_n}]_{t = T}\Delta y_{nT} = 0
+	\end{equation}
+	
+	\subsubsection{高阶导数}
+	高阶导数的情况在经济学的应用中比较少见，因此我们仅讨论$F(t,y,y',y'')$的情况。这种情况下，我们的一般横截条件为
+	\begin{equation}
+		[F - y'F_{y'} - y''F_{y''} + y'\frac{d}{dt}F_{y''}]_{t=T}\Delta T 
+		+ [F_{y'} - \frac{d}{dt}F_{y''}]_{t=T}\Delta y_T 
+		+ [F_{y''}]_{t=T}\Delta y'_T = 0
+	\end{equation}
+
+	\subsection{例子：劳动需求的最优调整}
+	
+	\newpage
+	
+	\section{变分法的二阶条件}
+	如同之前使用微分法来讨论极值问题。我们首先先找出了一阶的必要条件。但是一阶条件并不能告诉我们找到的是极大值还是极小值，我们需要二阶条件来验证我们的极值是极大值还是极小值。
+	
+	同样的，在变分法中，我们也需要二阶条件来判断我们找到的极值路径是使得泛函极大还是极小。如果如同我们之前所作的工作，当我们把目标函数$V$看作是$\varepsilon$的函数时，我们可以直接写出微分形式的二阶条件。
+	
+	二阶必要条件
+	\begin{equation}
+		\frac{d^2V}{d\varepsilon^2} \leqslant 0 \ (maximize \ V) \quad \frac{d^2V}{d\varepsilon^2} \geqslant 0 \ (minimize \ V)
+	\end{equation}
+	
+	二阶充分条件
+	\begin{equation}
+		\frac{d^2V}{d\varepsilon^2} < 0 \ (maximize \ V) \quad \frac{d^2V}{d\varepsilon^2} > 0 \ (minimize \ V)
+	\end{equation}
+
+	在这里，我们不妨回忆以下我们解决之前问题的二阶条件时是怎么做的。我们也是考虑二阶微分的正负。首先我们将二阶微分转换成了\textbf{二次型}。然后通过Hessian矩阵来判断二次型的符号，从而来判断微分的符号。我们还使用了另一种方法，即判断函数的\textbf{凹性与凸性}来确定极大值与极小值。
+	
+	在变分法二阶条件的讨论中，我们也可以如同上述思路一样进行。但是由于二次型的判别在古典变分法的发展过程中被忽略了，因此我们只给出凸性与凹性的条件。
+	
+	值得注意的是凸性与凹性是对于函数全局特征的描述。由于我们的极值只是一个局部的概念，因此我们还需要刻画局部凹性或局部凸性的概念，即\textbf{勒让德条件}(Legendre condition)。
+	
+	\subsection{凹性与凸性的条件}
+	首先我们来看变分法中关于凹性与凸性的充分条件。
+	
+	对于变分法的基本问题，如果被积函数$F(t,y,y')$关于$(y,y')$为凹，那么欧拉方程是$V[y]$取得\textbf{绝对极大值}的充分条件。类似的，如果被积函数$F(t,y,y')$关于$(y,y')$为凸，那么欧拉方程是$V[y]$取得\textbf{绝对极小值}的充分条件。
+	
+	如果我们的函数$F(t,y,y')$关于$(y,y')$是凹的，那么对于定义域中的任意两个不同点$(t,y,y'),(t,y^*,y^{*'})$，我们有
+	\begin{equation}
+		\begin{aligned}
+			&F(t,y,y') - F(t,y^*,y^{*'}) \\
+			& \leqslant  F_y(t,y^*,y^{*'})(y - y^*) +  F_{y'}(t,y^*,y^{*'})(y' - y^{*'}) \\
+			&=F_y(t,y^*,y^{*'})\varepsilon p(t) +  F_{y'}(t,y^*,y^{*'})\varepsilon p'(t)
+		\end{aligned}
+	\end{equation}
+	我们将上述式子两边对$t$进行积分，就可以得到
+	\begin{equation}
+		\begin{aligned}
+			V[y] - V[y^*] 
+			&\leqslant \varepsilon \int_{0}^{T} [F_y(t,y^*,y^{*'}) p(t) +  F_{y'}(t,y^*,y^{*'}) p'(t)]dt \\
+			&=\varepsilon \int_{0}^{T} p(t)[F_y(t,y^*,y^{*'}) - \frac{d}{dt}F_{y'}(t,y^*,y^{*'})]dt = 0
+		\end{aligned}
+	\end{equation}
+	这样我们就看到了，我们的极值大于所有其他可能的路径。
+	
+	如果函数是严格凹的，那么我们上述求出的若不等式就变为了严格不等式。因此这种情况下，我们得到的极值路径将会是唯一绝对最大值。
+	
+	如果存在着可变端点，那么我们上面式子需要再多加一项
+	\begin{equation}
+		\varepsilon[F_{y'}p(t)]_{t = T} = [F_{y'}(y - y^*)]_{t = T}
+	\end{equation}
+	因此我们的式子就变为了
+	\begin{equation}
+		V[y] \leqslant V[y^*] + [F_{y'}(y - y^*)]_{t = T}
+	\end{equation}
+	因此我们原有的定理是否成立就取决于后面一项的符号。如果后面项小于等于0，那么我们的原有定理就成立。
+	
+	幸运的是在可变端点的情况下，横截条件即会使得上述条件满足。因此在可变端点情况下，如果被积函数是凹的，那么欧拉方程于横截条件的联合就构成了$V[y]$取绝对最大值的充分条件。
+	
+	\subsubsection{凹性与凸性的判断}
+	既然我们的判别中需要凹性与凸性，那么我们就需要方法来检验凹性与凸性。最简单的办法就是使用定义。
+	
+	给定定义域中的任意两个不同点$u,v$，对于$0 < \theta < 1$，函数$f$为凹的，当且仅当
+	\begin{equation}
+		\theta f(u) + (1 - \theta)f(v) \leqslant f[\theta u + (1 - \theta v)]
+	\end{equation}
+	
+	那么和之前一样，我们也可以通过检验二次型符号来判断凹性与凸性。
+	
+	我们给定一个二次型
+	\begin{equation}
+		q = F_{y'y'}dy^{'2} + 2F_{y'y}dy'dy + F_{yy}dy^2
+	\end{equation}
+	那么我们就有：$F(t,y,y')$关于$(y,y')$是凹(凸)的，当且仅当二次型$q$处处负半定(正半定)；函数$F$是严格凹(严格凸)，当$q$处处负定(正定)。
+	
+	凹性虽然只要求负半定，但是它是一个全局的概念，需要二次型处处负半定。
+	
+	对于二次型的正定负定，我们可以直接利用$q$的行列式
+	\begin{equation}
+		|D| \equiv
+		\begin{vmatrix}
+			F_{y'y'} & F_{y'y} \\
+			F_{yy'} & F_{yy} \\
+		\end{vmatrix}
+	\end{equation}
+	并判断其顺序主子式的符号。但是这样判断的定性是用来要求严格凹或严格凸的，如果我们需要检验符号的半定性则需要更多的信息。
+	
+	我们还需要考虑一个行列式
+	\begin{equation}
+		|D^0| \equiv
+		\begin{vmatrix}
+			F_{yy} & F_{yy'} \\
+			F_{y'y} & F_{y'y'} \\
+		\end{vmatrix}
+	\end{equation}
+	我们设$|\tilde{D}_1|$代表上述两个判断式的一阶主子式，$|\tilde{D}_2|$代表上述两个判别式的二阶主子式。并定义$|\tilde{D}_1| \geqslant 0$代表判别式中的每一个元素都大于等于0，那么半定性的检验就是
+	
+	$q$为负半定时，$|\tilde{D}_1| \leqslant 0,|\tilde{D}_2| \geqslant 0$
+	
+	$q$为正半定时，$|\tilde{D}_1| \geqslant 0,|\tilde{D}_2| \geqslant 0$
+	
+	那么我们也可以使用特征根进行检验，设上述行列式的特征根为$r_1,r_2$。那么$q$负定时，$r_1,r_2 < 0$，$q$负半定时，$r_1,r_2 \leqslant 0$，且其中有一个值为0。
+
+	
+	\subsection{勒让德条件}
+	凸性与凹性是全局的概念，当我们的被积函数在全局中不具有这些性质的时候，我们就需要刻画局部凸性或局部凹性的概念，即勒让德条件。
+	
+	勒让德条件是一个必要条件。
+	
+	$V[y]$的最大化，$F_{y'y'} \leqslant 0,t \in [0,T]$
+	
+	$V[y]$的最小化，$F_{y'y'} \geqslant 0,t \in [0,T]$
+	
+	\subsection{一阶变分与二阶变分}
+	以上我们的分析都仍然基于一阶导数与二阶导数。然而我们可以以\textbf{一阶变分}(first variation)与\textbf{二阶变分}(second variation)的视角来分析变分法所解决的问题。
+	
+	变分法考虑的实际上是最优路径$V[y^*]$与相邻路径$V[y]$的离差
+	\begin{equation}
+		\Delta V \equiv V[y] - V[y^*] = \int_{0}^{T}F(t,y,y') \ dt - \int_{0}^{T}F(t,y^*,y^{*'}) \ dt
+	\end{equation}
+	我们可以将第一项的被积函数在$(t,y^*,y^{*'})$展开成泰勒级数。
+	\begin{equation}
+		\begin{aligned}
+			F(t,y,y')=
+			&F(t,y^*,y^{*'}) + [F_{t}(t-t) + F_{y}(y-y^*) + F_{y'}(y' - y^{*'})] \\
+			&+\frac{1}{2!}[F_{tt}(t-t)^2 + F_{yy}(y - y^*)^2 + F_{y'y'}(y' - y^{*'})^2 \\
+			&+2F_{ty}(t - t)(y - y^*) + 2F_{ty'}(t - t)(y' - y^{*'})\\
+			&+2F_{yy'}(y - y^*)(y' - y^{*'})] + \cdots + R_n
+		\end{aligned}
+	\end{equation}
+	我们将$y - y^* = \varepsilon p,y' - y^{*'} = \varepsilon p'$带入上式后我们就可以得到
+	\begin{equation}
+		\begin{aligned}
+			F(t,y,y')=
+			&F(t,y^*,y^{*'}) + F_{y}\varepsilon p + F_{y'}\varepsilon p' \\
+			&+\frac{1}{2!}[ F_{yy}(\varepsilon p)^2 + F_{y'y'}(\varepsilon p')^2 +2F_{yy'}(\varepsilon p)(\varepsilon p')] \\
+			& + \cdots + R_n
+		\end{aligned}
+	\end{equation}
+	运用上式的结果，我们就可以把两个路径的离差写成
+	\begin{equation}
+		\begin{aligned}
+			\Delta V = 
+			&\varepsilon \int_{0}^{T}(F_yp+F_{y'}p')dt \\
+			&+\frac{\varepsilon^2}{2}\int_{0}^{T}(F_{yy}p^2 + F_{y'y'}p^{'2} + 2F_{yy'}pp')dt \\
+			&+h.o.t
+		\end{aligned}
+	\end{equation}
+	那么其中的第一项就是一阶变分
+	\begin{equation}
+		\delta V \equiv \int_{0}^{T}(F_yp+F_{y'}p')dt = \frac{dV}{d\varepsilon}
+	\end{equation}
+	第二项就是二阶变分
+	\begin{equation}
+		\delta^2V \equiv \int_{0}^{T}(F_{yy}p^2 + F_{y'y'}p^{'2} + 2F_{yy'}pp')dt = \frac{d^2V}{d\varepsilon^2}
+	\end{equation}
+	
+	
+	\newpage
+	
+	\section{无限计划水平}
+	这一节我们考虑，当我们问题中的时间区间为$[0,T]$时，我们的问题应该如何解决。
+	
+	在无限计划水平中，我们的泛函不一定是收敛的，因此我们首先要考察如何判断泛函的收敛性；在泛函收敛的情况下，我们的横截条件也会产生变化，同样的，我们对于凹性与凸性的条件也会发生改变。
+	
+	\subsection{泛函的收敛}
+	由于我们的数学知识无法提供给我们工具对于泛函收敛的条件进行分析，因此我们直接给出几个收敛性的充分条件。
+	
+	\subsubsection{条件1}
+	给定广义积分$\int_{0}^{\infty}F(t,y,y')dt$，如果被积函数在整个积分区间都是有限的，而且在某个有限时点$t_0$实现了零值且对于所有的$t > t_0$，$F$恒等于0，那么这个积分将收敛。
+	
+	可以看到，在这个条件下，广义积分其实就是一个普通的积分。
+	
+	
+	\subsubsection{条件2}
+	值得注意的是，条件2通常被当作充分条件，但其实它并\textbf{不是}。
+	
+	给定广义积分$\int_{0}^{\infty}F(t,y,y')dt$，如果$\lim\limits_{t \to \infty}F \to 0$，那么这个积分将收敛。
+	
+	\subsubsection{条件3}
+	给定广义积分$\int_{0}^{\infty}F(t,y,y')dt$，如果被积函数为$G(t,y,y')e^{-\rho t}$的形式，且$G$有界，那么这个积分将收敛。
+	
+	\subsection{无限计划水平下的横截条件}
+	在无限计划水平下，我们原有的一般横截条件\ref{general transversal condition}就变为了
+	\begin{equation}
+		[F-y'F_{y'}]_{t \to \infty}\Delta T + [F_{y'}]_{t \to \infty}\Delta y_T = 0
+	\end{equation}
+	因为在无限计划水平下，$\Delta T \neq 0$，因此就要求如下条件
+	\begin{equation}
+		\lim\limits_{t \to \infty}(F-y'F_{y'}) = 0
+	\end{equation}
+	那么如果问题规定了渐近的终止状态
+	\begin{equation}
+		\lim\limits_{t \to \infty}y(t) = y_{\infty} = constant
+	\end{equation}
+	那么我们不需要额外的横截条件。
+	
+	如果我们的终止状态是自由的，那么我们就需要额外条件
+	\begin{equation}
+		\lim\limits_{t \to \infty}F_{y'} = 0
+	\end{equation}
+	
+	\subsection{凹性与凸性的条件}
+	凸性与凹性的分析，无限计划水平与可变端点是类似的。在可变端点的情况中，需要补充条件
+	\begin{equation}
+		[F_{y'}(y - y^*)]_{t = T} \leqslant 0
+	\end{equation}
+	那么在无限水平的情况下，我们需要的补充条件就是
+	\begin{equation}
+		\lim\limits_{F_{y'}(y - y^*)} \leqslant 0
+	\end{equation}
+	
+	\subsection{无限计划水平下的相图分析：简化的拉姆齐模型}
+	
+	\subsection{有限时间下的相图分析}
+	
+	
+	\newpage
+	
+	\section{约束问题}
+	在我们的问题中，除了对于端点的约束，还有可能出现对于状态变量更加一般的约束条件。在这里我们考虑四种约束条件对于我们求解问题的影响。
+	
+	\subsection{等式约束}
+	在等式约束的问题中，我们的问题一般为最大化或最小化
+	\begin{equation}
+		V = \int_{0}^{T}F(t,y_1,\cdots,y_n,y'_1,\cdots,y'_n)dt
+	\end{equation}
+	并且有着如下的约束
+	\begin{equation}
+		\begin{aligned}
+			&g^1(t,y_1,\cdots,y_n) = c_1 \\
+			&\vdots \\
+			&g^n(t,y_1,\cdots,y_n) = c_n \\
+		\end{aligned}
+	\end{equation}
+	并且这m组约束条件相互独立，即任意m节雅可比行列式不为0
+	\begin{equation}
+		\mathop{|J|}\limits_{(m\times m)} = |\frac{\partial (g^1,\cdots,g^m)}{\partial (y_1,\cdots,y_m)}| \neq 0
+	\end{equation}
+	并且我们的$m < n$。如果$m = n$，那么这些等式约束其实就规定了这些状态变量的路径。
+	
+	在这样的问题中，我们的被积函数就如同拉格朗日函数
+	\begin{equation}
+		\mathscr{F} = F + \sum_{i=1}^{m}\lambda_i(t)(c_i - g^i)
+	\end{equation}
+	那么我们新的泛函就是
+	\begin{equation}
+		\mathscr{V} = \int_{0}^{T}\mathscr{F}dt
+	\end{equation}
+	我们拉格朗日乘子也看作是状态变量，并使用欧拉方程。这样形式的欧拉方程也叫做\textbf{欧拉-拉格朗日方程}。这就是我们的一阶条件。
+	
+	值得注意的是我们的被积函数中并没有$\lambda'_i$，因此关于拉格朗日乘子的欧拉方程就会退化为
+	\begin{equation}
+		\mathscr{F}_{\lambda_i} = 0
+	\end{equation}
+	也就是满足约束
+	\begin{equation}
+		c_i - g^i = 0
+	\end{equation}
+	
+	\subsection{微分方程约束}
+	现在我们假设还是使得之前的目标函数最大化或最小化，但是我们的约束为$m$个微分方程，其中$m<n$
+	\begin{equation}
+		\begin{aligned}
+			&g^1(t,y_1,\cdots,y_n,y'_1,\cdots,y'_n) = c_1 \\
+			&\vdots \\
+			&g^n(t,y_1,\cdots,y_n,y'_1,\cdots,y'_n) = c_n \\
+		\end{aligned}
+	\end{equation}
+	对于这样的情况，我们的处理方法和上一种方法相同。也是用微分方程构造拉格朗日方程，并使用欧拉-拉格朗日方程。
+	
+	\subsection{不等式约束}
+	不等式约束如下所示
+	\begin{equation}
+		\begin{aligned}
+			&g^1(t,y_1,\cdots,y_n) \leqslant c_1 \\
+			&\vdots \\
+			&g^n(t,y_1,\cdots,y_n) \leqslant c_n \\
+		\end{aligned}
+	\end{equation}
+	我们的处理方法还是和之前相同，只不过这里我们对于拉格朗日乘子的相应方程应该是一个补充松弛条件
+	\begin{equation}
+		\lambda_i(t)(c_i - g^i) = 0
+	\end{equation}
+	
+	\subsection{等周长问题}
+	最后一种约束是等周长约束。
+	\begin{equation}
+		\int_{0}^{T}G(t,y,y')dt = k
+	\end{equation}
+	等周长约束也叫做积分约束。它的特点在于
+	\begin{enumerate}
+		\item 等周长约束的是一个积分，而不是每个时点上的值
+		
+		\item 拉格朗日乘子的解是一个常数。
+	\end{enumerate}
+	因此如果运用上面两个特征，我们可以直接写出我们的式子
+	\begin{equation}
+		\mathscr{F} = F(t,y,y') - \lambda G(t,y,y')
+	\end{equation}
+	然后直接使用欧拉-拉格朗日方程。并且我们只需要对于其中的状态变量进行计算，而不需要对于拉格朗日乘子进行计算。
+	
+	现在我们来证明以下为什么拉格朗日的乘子的解是一个常数。我们以单状态变量与单积分约束为例。
+	
+	首先我们定义函数
+	\begin{equation}
+		\Gamma(t) = \int_{0}^{t}G(t,y,y')dt
+	\end{equation}
+	那么我们就有
+	\begin{equation}
+		\Gamma(0) = 0,\Gamma(T) = k
+	\end{equation}
+	且我们知道$\Gamma$的导数就是$G$
+	\begin{equation}
+		G(t,y,y') - \Gamma'(t) = 0
+	\end{equation}
+	而我们可以把上式看作是一个等式约束，因此我们可以写出拉格朗日被积函数
+	\begin{equation}
+		\tilde{F} = F(t,y,y') + \lambda(t)[0 - G(t,y,y') + \Gamma'(t)]
+	\end{equation}
+	这里，我们有一个额外的状态变量$\Gamma$。因此对于这个状态变量也有欧拉方程
+	\begin{equation}
+		\tilde{F}_{\Gamma} - \frac{d}{dt}\tilde{F}_{\Gamma'} = 0
+	\end{equation}
+	显然，上式可以化简为
+	\begin{equation}
+		- \frac{d}{dt} \lambda(t) = 0
+	\end{equation}
+	因此可以得到$\lambda = constant$。其他状态变量的欧拉方程为
+	\begin{equation}
+		\tilde{F}_{y} - \frac{d}{dt}\tilde{F}_{y'} = 0
+	\end{equation}
+	也可以转换为
+	\begin{equation}
+		(F_y - \lambda G_y) - \frac{d}{dt}(F_{y'} - \lambda G_{y'}) = 0
+	\end{equation}
+	因此我们可以根据上述条件构造一个拉格朗日方程
+	\begin{equation}
+		\mathscr{F} = F(t,y,y') - \lambda G(t,y,y')
+	\end{equation}
+
+	
+	\subsection{例子：可耗竭资源的经济学}
+	
+	
+	
+	\newpage
+	
+	
+	\section{最优控制中的最大值原理}
+	在变分法中，我们处理的问题要求问题中的函数具有可微性，且我们只能处理内部解。这章开始我们介绍一个更加现代的方法，最优控制理论(optimal control theory)，它能够处理边角解(conner solutions)这样的非古典情形。
+	
+	在最优控制理论中，控制变量是我们讨论的核心。我们希望求解出控制变量的最优路径，通常求出这个最优路径后，我们也可以得到状态变量的最优路径。
+	
+	最优控制的最简单问题如下
+	\begin{equation}
+		\begin{aligned}
+			&\max &&V = \int_{0}^{T}F[t,y,u]dt \\
+			&s.t. &&\dot{y} = f(t,y,u) (\text{运动方程}) \\
+			&  &&y(0) = A,y(T)\text{自由} \\ 
+			&  &&u(t) \in \mathscr{U} \ \forall t \in [0,T]
+		\end{aligned}
+	\end{equation}
+	值得注意的是即使在最简单的问题中，我们的状态变量也是有自由状态的。因为在我们的最大值原理过程中，我们会使用任意的$\Delta u$，这就意味着任意的$\Delta y$。
+	
+	最优控制理论的一个显著特点是，控制变量的可行路径不需要连续，只需要分段连续。且我们的状态路径虽然需要连续但是只需要分段可微。
+	
+	如果我们有着特殊的运动方程
+	\begin{equation}
+		\dot{y} = u
+	\end{equation}
+	那么我们的问题就化简成了有垂直终止线的变分法问题。
+	\begin{equation}
+		\begin{aligned}
+			&\max &&V = \int_{0}^{T}F(t,y,y')dt \\
+			&s.t.&&y(0) = A,y(T)\text{自由} \\
+		\end{aligned}
+	\end{equation}
+
+	\subsection{最大值原理}
+	最优控制的一阶必要条件被称为最大值原理(the maximum principle)。
+	
+	在使用这个结论的过程中，我们首先得先引入\textbf{共态变量}(costate variable)/\textbf{辅助变量}(auxiliary variable)，记为$\lambda(t)$。
+	
+	共态变量通过\textbf{汉密尔顿函数}(Hamiltonian function)进入最优控制理论。汉密尔顿函数定义为
+	\begin{equation}
+		H(t,y,u,\lambda) \equiv F(t,y,u) + \lambda(t)f(t,y,u)
+	\end{equation}
+	我们可以看到我们的共态变量作为一个权重值出现。完整的汉密尔顿函数可以写为
+	\begin{equation}
+		H(t,y,u,\lambda) \equiv \lambda_0F(t,y,u) + \lambda(t)f(t,y,u)
+	\end{equation}
+	如果$\lambda_0$是非负常数，那么我们总可以将上式进行标准化。
+	
+	最大值原理的条件如下
+	\begin{equation}
+		\begin{aligned}
+			& \max_{u} \ H(t,y,u,\lambda) \\
+			& \dot{y} = \frac{\partial H}{\partial \lambda} \\
+			& \dot{\lambda} = - \frac{\partial H}{\partial y} \\
+			& \lambda(T) = 0
+		\end{aligned}
+	\end{equation}
+	我们可以看到第一个条件是一个比较宽泛的表达，这是为了能够包含边角解的情况。第二个条件也只是运动方程，
+	
+	第三个方程规定了共态变量的运动路径，这个方程和第二个方程一起被称为给定最优化问题的\textbf{汉密尔顿系统}(Hamiltonian system)或\textbf{正则系统}(canonical system)。
+	
+	最后一个条件就是自由终止状态的横截条件。在不同的终止条件下存在着不同的横截条件。
+	
+	\subsection{以变分法来看待最大值原理}
+	很明显，变分法与最大值原理所处理的问题有所不同，因此我们在这里的分析中假设控制变量$u$不受约束，因此$u^*$是个内部解。且我们假设汉密尔顿函数关于$u$可微，因此可以用一阶条件替换$\max_{u}H$。最后我们假设初始点固定，但终止点可变，以得到横截条件。
+	
+	因此在这里，我们的问题是
+	\begin{equation}
+		\begin{aligned}
+			&\max &&V = \int_{0}^{T}F(t,y,u)dt \\
+			&s.t. &&\dot{y} = f(t,y,u) (\text{运动方程}) \\
+			&  &&y(0) = y_0 \\ 
+		\end{aligned}
+	\end{equation}
+	我们首先把运动方程纳入目标泛函。由于$f(t,y,u) - \dot{y}$在区间$[0,T]$上总是成立，因此我们就知道
+	\begin{equation}
+		\int_{0}^{T}\lambda(t)[f(t,y,u) - \dot{y}]dt = 0
+	\end{equation}
+	因此我们原来的泛函加上上式将不会改变值
+	\begin{equation}
+		\begin{aligned}
+			\mathscr{V} &\equiv V + \int_{0}^{T}\lambda(t)[f(t,y,u) - \dot{y}]dt \\
+			&=\int_{0}^{T}\{F(t,y,u) + \lambda(t)[f(t,y,u) - \dot{y}]\}dt
+		\end{aligned}
+	\end{equation}
+	之前我们就定义了汉密尔顿函数
+	\begin{equation}
+		H(t,y,u,\lambda) \equiv F(t,y,u) + \lambda(t)f(t,y,u)
+	\end{equation}
+	因此我们可以将我们新的泛函变为
+	\begin{equation}
+		\begin{aligned}
+			\mathscr{V} & = \int_{0}^{T}[H(t,y,u,\lambda) - \lambda(t)\dot{y}]dt \\
+			& = \int_{0}^{T}H(t,y,u,\lambda)dt - \int_{0}^{T}\lambda(t)\dot{y}dt \\
+			&=\int_{0}^{T}H(t,y,u,\lambda)dt - \lambda(T)y_T + \lambda(0)y_0 + \int_{0}^{T} y(t)\dot{\lambda}dt \\
+			&=\int_{0}^{T}[H(t,y,u,\lambda) + y(t)\dot{\lambda}]dt - \lambda(T)y_T + \lambda(0)y_0
+		\end{aligned}
+	\end{equation}
+	我们可以看到第一项是在整个计划时间上，第二项只涉及了终止时间，第三项只涉及初始时间。
+	
+	因此在这个问题中，我们关心变量$y,u,\lambda$，以及时间$T$和终止状态$y_T$。
+	
+	首先我们可以看到，只要我们严格遵守了运动方程，那么我们的$\lambda$对于泛函就没有影响，因此可以把运动方程看作是一个条件。
+	
+	现在我们考虑控制变量$u(t)$以及控制变量对状态变量$y(t)$的影响。我们可以和之前的方法一样，构建相邻的控制路径
+	\begin{equation}
+		u(t) = u^*(t) + \varepsilon p(t)
+	\end{equation}
+	由于有着运动方程，因此对于每个$\varepsilon$，我们也可以写出状态变量的相邻路径
+	\begin{equation}
+		y(t) = y^*(t) + \varepsilon q(t)
+	\end{equation}
+	对于终止时间与终止状态我们也有
+	\begin{equation}
+		T = T^* + \varepsilon \Delta T,y_T = y_T^* + \varepsilon \Delta y_T
+	\end{equation}
+	这也意味着$\frac{dT}{d\varepsilon} = \Delta T,\frac{dy_T}{d\varepsilon} = \Delta y_T$
+	
+	再将上式带入我们之前的泛函，我们就可以将$\mathscr{V}$转换成$\varepsilon$的函数。
+	\begin{equation}
+		\mathscr{V}=\int_{0}^{T(\varepsilon)}\{H(t,y^*(t) + \varepsilon q(t),u^*(t) + \varepsilon p(t),\lambda) + \dot{\lambda}[y^*(t) + \varepsilon q(t)]\}dt - \lambda(T)y_T + \lambda(0)y_0
+	\end{equation}
+	那么对于这个式子使用条件$d\mathscr{V}/d\varepsilon = 0$我们就可以得到
+	\begin{equation}
+		\begin{aligned}
+			&\int_{0}^{T(\varepsilon)}\{[\frac{\partial H}{\partial y}q(t) + \frac{\partial H}{\partial u}p(t)] + \dot{\lambda}q(t)\}dt 
+			+ [H + \dot{\lambda}y]_{t = T}\frac{dT}{d\varepsilon} 
+			- \lambda(T)\Delta y_T 
+			- y_T\dot{\lambda}(T)\Delta T \\
+			&=\int_{0}^{T}[(\frac{\partial H}{\partial y} + \dot{\lambda})q(t) + \frac{\partial H}{\partial u}p(t)]dt
+			+ [H]_{t = T}\Delta T 
+			+  \dot{\lambda(T)}y_T\Delta T
+			- \lambda(T)\Delta y_T 
+			- y_T\dot{\lambda}(T)\Delta T \\
+			&=\int_{0}^{T}[(\frac{\partial H}{\partial y} + \dot{\lambda})q(t) + \frac{\partial H}{\partial u}p(t)]dt
+			+ [H]_{t = T}\Delta T 
+			- \lambda(T)\Delta y_T  = 0
+			\label{variations perspective}
+		\end{aligned}
+	\end{equation}
+	因此为了使上式满足，我们的三个项都需要为0。如果积分项等于0，那么我们就有
+	\begin{equation}
+		\dot{\lambda} = -\frac{\partial H}{\partial y},\frac{\partial H}{\partial u} = 0
+	\end{equation}
+	第一个条件使共态变量$\lambda$的运动方程，或者称为\textbf{共态方程}。第二个式子可以看作是$\max_{u}H$的条件。
+	
+	后面两个式子决定了不同情况下的横截条件，在有垂直终止线的情况下，我们就有条件
+	\begin{equation}
+		\lambda(T) = 0
+	\end{equation}
+	
+	\subsection{不同的终止条件}
+	
+	\subsubsection{固定终止点}
+	固定终止点的情况下，横截条件如下
+	\begin{equation}
+		y(T) = y_T
+	\end{equation}
+	
+	\subsubsection{水平终止线}
+	如果有着水平终止线，那么意味着终止状态固定，但是时间不固定，因此$\Delta y_T = 0$，$\Delta T$自由，根据\ref{variations perspective}我们就有
+	\begin{equation}
+		[H]_{t = T} = 0
+	\end{equation}
+	
+	\subsubsection{终止曲线}
+	在终止曲线$y_T = \phi(T)$的情况下，我们有$\Delta y_T = \phi' \Delta T$，根据\ref{variations perspective}我们就可以知道
+	\begin{equation}
+		[H - \lambda\phi']_{t = T} = 0
+	\end{equation}
+
+	\subsubsection{截断垂直终止线}
+	在截断的情况下，分析的过程和变分法以及普通的微分法类似，我们都有个松弛互补的条件
+	\begin{equation}
+		\lambda(T) \geqslant 0,y_T \geqslant y_{min},(y_T - y_{min})\lambda(T) = 0
+	\end{equation}
+	
+	\subsubsection{截断水平终止线}
+	截断水平终止线的情况下，我们直接给出综合的横截条件按
+	\begin{equation}
+		[H]_{t = T} = 0,T \leqslant T_{max},(T - T_{max})[H]_{t = T} = 0
+	\end{equation}
+	
+	\subsection{自控问题的汉密尔顿函数的不变性}
+	如果我们研究的问题是自控的，那么汉密尔顿函数就有着特殊的性质，即汉密尔顿函数有着不随时间改变的常数值。
+	
+	一个自控的问题中，被积函数与运动方程中都不含有自变量$t$。在这样的情况下，汉密尔顿函数对$t$的导数为
+	\begin{equation}
+		\begin{aligned}
+			\frac{d H}{d t} &= \frac{\partial H}{\partial t} + \frac{\partial H}{\partial y}\dot{y} + \frac{\partial H}{\partial u}\dot{u} + \frac{\partial H}{\partial \lambda} \dot{\lambda} \\
+			&=\frac{\partial H}{\partial t} + \frac{\partial H}{\partial y}\frac{\partial H}{\partial \lambda}  + \frac{\partial H}{\partial \lambda} (-\frac{\partial H}{\partial y}) \\
+			&=\frac{\partial H}{\partial t}
+		\end{aligned}
+	\end{equation}
+	又因为被积函数与状态方程都不含有t，因此我们就有
+	\begin{equation}
+		\frac{dH^*}{dt} = 0
+	\end{equation}
+	即我们的$H$是一个常数。
+	
+	\subsection{例子：政治型经济周期}
+	
+	
+	\newpage
+	
+	\section{最优控制的更多讨论}
+	
+	\subsection{最大值原理的一种经济学解释}
+	我们首先考虑一个问题。假设企业希望在时间区间$[0,T]$上的利润最大化。在这个问题中状态变量为资本存量$K$，，控制变量$u$代表企业做出的某个经济决策。
+	\begin{equation}
+		\begin{aligned}
+			&\max &&\Pi = \int_{0}^{T}\pi(t,K,u)dt \\
+			&s.t. &&\dot{K} = f(t,K,u)  \\
+			&  &&K(0) = K_0,K(T)\text{自由} \\ 
+		\end{aligned}
+	\end{equation}
+	我们的共态变量其实就是影子价格，在这个问题中，就是资本对于总利润的价格。
+	
+	我们的汉密尔顿函数和利润前景相关。
+	\begin{equation}
+		H = \pi(t,K,u) + \lambda(t)f(t,K,u)
+	\end{equation}
+	第一项就代表了当前资本与经济决策能带来的利润。而第二项则代表了执行了政策$u$后，现有资本价值的变化速度，也就是未来的利润。
+	
+	最大值原理中有两个运动方程，一个是状态变量的运动方程，一个是共态变量的运动方程。共态变量的运动方程衡量了影子价格的下降速度。
+	\begin{equation}
+		- \dot{\lambda} = \frac{\partial \pi}{\partial K} + \lambda(t)\frac{\partial f}{\partial K}
+	\end{equation}
+	第一项为资本对当前利润做出的贡献；第二项为资本变化对后续利润做出的贡献。最大值原理要求资本的影子价格的降低速度等于资本对企业当前和未来利润的贡献速度。
+	
+	在固定终止时间的情况下，横截条件为
+	\begin{equation}
+		\lambda(T) = 0
+	\end{equation}
+	这意味这企业会选择终止状态，使得资本对企业利润增加的潜力为0.
+	
+	在终止状态的情况下，横截条件为
+	\begin{equation}
+		[H]_{t = T} = 0
+	\end{equation}
+	即企业会选择终止时间，使得这个时点的利润和这个时点后的利润之和为0。
+	
+	
+	\subsection{当前值汉密尔顿函数}
+	通常，我们的被积函数中都含有贴现因子，这就使得导数的计算更加复杂。为了使得新的汉密尔顿函数不含有贴现因子，我们可以使用当前值汉密尔顿函数。
+	
+	标准的汉密尔顿函数为
+	\begin{equation}
+		H = G(t,y,u)e^{-\rho t} + \lambda f (t,y,u)
+	\end{equation}
+	我们定义新的拉格朗日乘子
+	\begin{equation}
+		m = \lambda e^{\rho t}
+	\end{equation}
+	这样我们就可以得到当前值汉密尔顿函数
+	\begin{equation}
+		H_{c} \equiv He^{\rho t} = G(t,y,u) + mf(t,y,u)
+	\end{equation}
+	这时候
+	\begin{equation}
+		\lambda = me^{-\rho t}
+	\end{equation}
+	因此我们有
+	\begin{equation}
+		\dot{\lambda} = \dot{m}e^{-\rho t} - \rho m e^{-\rho t}
+	\end{equation}
+	在这样的情况下，我们的最大值原理需要进行改写
+	\begin{equation}
+		\begin{aligned}
+			& \max_{u} \ H_c(t,y,u,\lambda) \\
+			& \dot{y} = \frac{\partial H_c}{\partial \lambda} \\
+			& \dot{m} = - \frac{\partial H_c}{\partial y} + \rho m \\
+			& m(T)e^{-\rho T} = 0
+		\end{aligned}
+	\end{equation}
+	
+	\subsection{充分条件}
+	我们之前给出的最大值原理只是一组必要条件，只有在满足了某些凹性条件后，我们的最大值原理的条件就是最大化的充分条件。
+	
+	具体来说，我们介绍两种充分条件曼加萨林充分性定理和阿罗充分性定理。
+	
+	\subsubsection{曼加萨林充分性定理}
+	对于一个一般的最优控制问题，曼加萨林充分性定理为：如果函数$F,f$都是可微的，而且都关于变量$(y,u)$联合凹。且如果$f$关于$u$或者$y$不是线性的，$\lambda(t)\geqslant 0$。那么我们的最大值原理的必要条件也是全局最大化的充分条件。
+	
+	在这里，我们简单证明一下这个定理。
+	
+	如果我们的函数$F,f$对于$(y,u)$都是凹的，那么我们就有
+	\begin{equation}
+		\begin{aligned}
+			&F(t,y,u) - F(t,y^*,u
+			^{*}) \\
+			& \leqslant  F_y(t,y^*,u^{*})(y - y^*) +  F_{u}(t,y^*,u^{*})(u - u^{*}) \\
+		\end{aligned}
+	\end{equation}
+	以及
+	\begin{equation}
+		\begin{aligned}
+			&f(t,y,u) - f(t,y^*,u
+			^{*}) \\
+			& \leqslant  f_y(t,y^*,u^{*})(y - y^*) +  f_{u}(t,y^*,u^{*})(u - u^{*}) \\
+		\end{aligned}
+	\end{equation}
+	将上面的第一个式子对两边在$[0,T]$上进行积分，那么我们就会得到
+	\begin{equation}
+		\begin{aligned}
+			V - V^* \leqslant & \int_{0}^{T}[F_y(t,y^*,u^{*})(y - y^*) +  F_{u}(t,y^*,u^{*})(u - u^{*})]dt \\
+			=&\int_{0}^{T}[
+			-\dot{\lambda}^*(y - y^*) 
+			- \lambda^*f_y(t,y^*,u^*)(y-y^*)
+			-\lambda^*f_u(t,y^*,u^*)(u - u^*)]dt \\
+			=&\int_{0}^{T}[
+			\lambda^*f(t,y,u) - \lambda^*f(t,y^*,u^*) 
+			- \lambda^*f_y(t,y^*,u^*)(y-y^*)
+			-\lambda^*f_u(t,y^*,u^*)(u - u^*)]dt \\
+			=&\int_{0}^{T}\lambda^*[
+			f(t,y,u) - f(t,y^*,u^*) 
+			- f_y(t,y^*,u^*)(y-y^*)
+			-f_u(t,y^*,u^*)(u - u^*)]dt\\
+			\leqslant& 0
+		\end{aligned}
+	\end{equation}
+	
+	\subsubsection{阿罗充分性定理}
+	在这里，我们直接给出阿罗充分性定理。设我们最优化的控制变量$u^*$。当我们把最优化的控制变量带入汉密尔顿函数中得到了\textbf{最大化汉密尔顿函数}。
+	\begin{equation}
+		H^0(t,y,\lambda) = F(t,y,u^*) + \lambda f(t,y,u^*)
+	\end{equation}
+	阿罗不可能性定理为：如果对于区间$[0,T]$中的所有$t$以及给定的$\lambda$，我们的最大化汉密尔顿函数关于变量$y$是凹的。那么我们的最大值原理就是全局最大化的充分条件。
+	
+	\newpage
+	
+	\section{无限水平问题}
+	和变分法中的问题一样，我们这里把计划的时间扩展到无限时，因此我们也要考察两方面的问题。第一是目标泛函是否收敛，第二就是我们的横截条件会如何变化。泛函的收敛性我们还是采用和之前一样的条件。
+	
+	\subsection{横截条件}
+	如果我们的无限水平伴随着固定的终止状态，即
+	\begin{equation}
+		\lim\limits_{t \to \infty}y(t) = y_{\infty}
+	\end{equation}
+	那么我们的横截条件就和有限水平问题一样
+	\begin{equation}
+		\lim\limits_{t \to \infty}H = 0
+	\end{equation}
+	类似的进行推广，如果当$t \to \infty$时，我们的状态是自由的，那么我们就有横截条件
+	\begin{equation}
+		\lim\limits_{t \to \infty}\lambda(t) = 0
+	\end{equation}
+	我们可以从变分法的观点再次进行考察，从\ref{variations perspective}我们可以知道最大化的一阶条件为
+	\begin{equation}
+		\frac{d\mathscr{V}}{d\varepsilon}=\int_{0}^{T}[(\frac{\partial H}{\partial y} + \dot{\lambda})q(t) + \frac{\partial H}{\partial u}p(t)]dt
+		+ [H]_{t = T}\Delta T 
+		- \lambda(T)\Delta y_T = 0
+	\end{equation}
+	因此推广到无限水平时就是
+	\begin{equation}
+		\frac{d\mathscr{V}}{d\varepsilon}=\int_{0}^{T}[(\frac{\partial H}{\partial y} + \dot{\lambda})q(t) + \frac{\partial H}{\partial u}p(t)]dt
+		+ \lim\limits_{t \to \infty}[H]_{t = T}\Delta T 
+		- \lim\limits_{t \to \infty}\lambda(T)\Delta y_T = 0
+	\end{equation}
+	因此根据这个式子，我们也可以产出之前的横截条件。
+	
+ 	\newpage
+	
+	\section{含有约束的最优化控制问题}
+	
+	
+\end{document}
